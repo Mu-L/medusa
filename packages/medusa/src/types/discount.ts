@@ -8,8 +8,14 @@ import {
   Validate,
   ValidateNested,
 } from "class-validator"
-import { DiscountConditionOperator } from "../models/discount-condition"
-import { AllocationType, DiscountRuleType } from "../models/discount-rule"
+import {
+  AllocationType,
+  DiscountConditionOperator,
+  DiscountConditionType,
+  DiscountRuleType,
+  Region,
+} from "../models"
+import { optionalBooleanMapper } from "../utils/validators/is-boolean"
 import { ExactlyOne } from "./validators/exactly-one"
 
 export type QuerySelector = {
@@ -23,12 +29,12 @@ export class FilterableDiscountProps {
 
   @IsBoolean()
   @IsOptional()
-  @Transform(({ value }) => value === "true")
+  @Transform(({ value }) => optionalBooleanMapper.get(value))
   is_dynamic?: boolean
 
   @IsBoolean()
   @IsOptional()
-  @Transform(({ value }) => value === "true")
+  @Transform(({ value }) => optionalBooleanMapper.get(value))
   is_disabled?: boolean
 
   @ValidateNested()
@@ -104,15 +110,23 @@ export class AdminUpsertConditionsReq {
   customer_groups?: string[]
 }
 
-export type UpsertDiscountConditionInput = {
+export const DiscountConditionMapTypeToProperty = {
+  [DiscountConditionType.PRODUCTS]: "products",
+  [DiscountConditionType.PRODUCT_TYPES]: "product_types",
+  [DiscountConditionType.PRODUCT_COLLECTIONS]: "product_collections",
+  [DiscountConditionType.PRODUCT_TAGS]: "product_tags",
+  [DiscountConditionType.CUSTOMER_GROUPS]: "customer_groups",
+}
+
+export type DiscountConditionInput = {
   rule_id?: string
   id?: string
   operator?: DiscountConditionOperator
-  products?: string[]
-  product_collections?: string[]
-  product_types?: string[]
-  product_tags?: string[]
-  customer_groups?: string[]
+  products?: (string | { id: string })[]
+  product_collections?: (string | { id: string })[]
+  product_types?: (string | { id: string })[]
+  product_tags?: (string | { id: string })[]
+  customer_groups?: (string | { id: string })[]
 }
 
 export type CreateDiscountRuleInput = {
@@ -120,7 +134,7 @@ export type CreateDiscountRuleInput = {
   type: DiscountRuleType
   value: number
   allocation: AllocationType
-  conditions?: UpsertDiscountConditionInput[]
+  conditions?: DiscountConditionInput[]
 }
 
 export type CreateDiscountInput = {
@@ -132,7 +146,7 @@ export type CreateDiscountInput = {
   ends_at?: Date
   valid_duration?: string
   usage_limit?: number
-  regions?: string[]
+  regions?: string[] | Region[]
   metadata?: Record<string, unknown>
 }
 
@@ -141,7 +155,7 @@ export type UpdateDiscountRuleInput = {
   description?: string
   value?: number
   allocation?: AllocationType
-  conditions?: UpsertDiscountConditionInput[]
+  conditions?: DiscountConditionInput[]
 }
 
 export type UpdateDiscountInput = {
@@ -160,5 +174,5 @@ export type CreateDynamicDiscountInput = {
   code: string
   ends_at?: Date
   usage_limit: number
-  metadata?: object
+  metadata?: Record<string, unknown>
 }

@@ -12,8 +12,10 @@ import {
   DateComparisonOperator,
   NumericalComparisonOperator,
   StringComparisonOperator,
+  WithRequiredProperty,
 } from "./common"
 import { XorConstraint } from "./validators/xor"
+import { ProductVariant } from "../models"
 
 export type ProductVariantPrice = {
   id?: string
@@ -57,12 +59,12 @@ export type CreateProductVariantInput = {
   width?: number
   options: ProductVariantOption[]
   prices: ProductVariantPrice[]
-  metadata?: object
+  metadata?: Record<string, unknown>
 }
 
 export type UpdateProductVariantInput = {
   title?: string
-  product_id: string
+  product_id?: string
   sku?: string
   barcode?: string
   ean?: string
@@ -72,15 +74,40 @@ export type UpdateProductVariantInput = {
   manage_inventory?: boolean
   hs_code?: string
   origin_country?: string
+  variant_rank?: number
   mid_code?: string
   material?: string
   weight?: number
   length?: number
   height?: number
   width?: number
-  options: ProductVariantOption[]
+  options?: ProductVariantOption[]
+  prices?: ProductVariantPrice[]
+  metadata?: Record<string, unknown>
+}
+
+export type UpdateProductVariantData = {
+  variant: ProductVariant
+  updateData: UpdateProductVariantInput
+}
+
+export type UpdateVariantPricesData = {
+  variantId: string
   prices: ProductVariantPrice[]
-  metadata?: object
+}
+
+export type UpdateVariantRegionPriceData = {
+  variantId: string
+  price: {
+    currency_code: string
+    region_id: string
+    amount: number
+  }
+}
+
+export type UpdateVariantCurrencyPriceData = {
+  variantId: string
+  price: WithRequiredProperty<ProductVariantPrice, "currency_code">
 }
 
 export class FilterableProductVariantProps {

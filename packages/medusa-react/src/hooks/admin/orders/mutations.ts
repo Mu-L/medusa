@@ -1,4 +1,3 @@
-import { adminOrderKeys } from "./queries"
 import {
   AdminOrdersRes,
   AdminPostOrdersOrderFulfillmentsReq,
@@ -7,27 +6,18 @@ import {
   AdminPostOrdersOrderReturnsReq,
   AdminPostOrdersOrderShipmentReq,
   AdminPostOrdersOrderShippingMethodsReq,
-  AdminPostOrdersReq,
 } from "@medusajs/medusa"
 import { Response } from "@medusajs/medusa-js"
-import { useMutation, UseMutationOptions, useQueryClient } from "react-query"
+import {
+  useMutation,
+  UseMutationOptions,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { useMedusa } from "../../../contexts/medusa"
 import { buildOptions } from "../../utils/buildOptions"
-
-export const useAdminCreateOrder = (
-  options?: UseMutationOptions<
-    Response<AdminOrdersRes>,
-    Error,
-    AdminPostOrdersReq
-  >
-) => {
-  const { client } = useMedusa()
-  const queryClient = useQueryClient()
-  return useMutation(
-    (payload: AdminPostOrdersReq) => client.admin.orders.create(payload),
-    buildOptions(queryClient, adminOrderKeys.lists(), options)
-  )
-}
+import { adminProductKeys } from "../products"
+import { adminVariantKeys } from "../variants"
+import { adminOrderKeys } from "./queries"
 
 export const useAdminUpdateOrder = (
   id: string,
@@ -140,7 +130,12 @@ export const useAdminCreateFulfillment = (
       client.admin.orders.createFulfillment(orderId, payload),
     buildOptions(
       queryClient,
-      [adminOrderKeys.lists(), adminOrderKeys.detail(orderId)],
+      [
+        adminOrderKeys.lists(),
+        adminOrderKeys.detail(orderId),
+        adminVariantKeys.all,
+        adminProductKeys.lists(),
+      ],
       options
     )
   )
@@ -232,18 +227,5 @@ export const useAdminArchiveOrder = (
       [adminOrderKeys.lists(), adminOrderKeys.detail(id)],
       options
     )
-  )
-}
-
-export const useAdminDeleteOrderMetadata = (
-  id: string,
-  options?: UseMutationOptions<Response<AdminOrdersRes>, Error, string>
-) => {
-  const { client } = useMedusa()
-  const queryClient = useQueryClient()
-
-  return useMutation(
-    (key: string) => client.admin.orders.deleteMetadata(id, key),
-    buildOptions(queryClient, adminOrderKeys.detail(id), options)
   )
 }

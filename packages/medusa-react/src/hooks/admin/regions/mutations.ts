@@ -1,18 +1,21 @@
-import { adminRegionKeys } from "./queries"
 import {
-  AdminRegionsDeleteRes,
-  AdminRegionsRes,
-  AdminPostRegionsRegionReq,
-  AdminPostRegionsReq,
-  AdminPostRegionsRegionMetadata,
   AdminPostRegionsRegionCountriesReq,
   AdminPostRegionsRegionFulfillmentProvidersReq,
   AdminPostRegionsRegionPaymentProvidersReq,
+  AdminPostRegionsRegionReq,
+  AdminPostRegionsReq,
+  AdminRegionsDeleteRes,
+  AdminRegionsRes,
 } from "@medusajs/medusa"
 import { Response } from "@medusajs/medusa-js"
-import { useMutation, UseMutationOptions, useQueryClient } from "react-query"
+import {
+  useMutation,
+  UseMutationOptions,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { useMedusa } from "../../../contexts/medusa"
 import { buildOptions } from "../../utils/buildOptions"
+import { adminRegionKeys } from "./queries"
 
 export const useAdminCreateRegion = (
   options?: UseMutationOptions<
@@ -66,37 +69,6 @@ export const useAdminDeleteRegion = (
       [adminRegionKeys.lists(), adminRegionKeys.detail(id)],
       options
     )
-  )
-}
-
-export const useAdminSetRegionMetadata = (
-  id: string,
-  options?: UseMutationOptions<
-    Response<AdminRegionsRes>,
-    Error,
-    AdminPostRegionsRegionMetadata
-  >
-) => {
-  const { client } = useMedusa()
-  const queryClient = useQueryClient()
-
-  return useMutation(
-    (metadata: AdminPostRegionsRegionMetadata) =>
-      client.admin.regions.setMetadata(id, metadata),
-    buildOptions(queryClient, adminRegionKeys.detail(id), options)
-  )
-}
-
-export const useAdminDeleteRegionMetadata = (
-  id: string,
-  options?: UseMutationOptions<Response<AdminRegionsRes>, Error, string>
-) => {
-  const { client } = useMedusa()
-  const queryClient = useQueryClient()
-
-  return useMutation(
-    (key: string) => client.admin.regions.deleteMetadata(id, key),
-    buildOptions(queryClient, adminRegionKeys.detail(id), options)
   )
 }
 

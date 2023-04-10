@@ -1,10 +1,8 @@
 # Class: SearchService
 
-Default class that implements SearchService but provides stuv implementation for all methods
-
 ## Hierarchy
 
-- `"medusa-interfaces"`
+- `AbstractSearchService`
 
   ↳ **`SearchService`**
 
@@ -12,211 +10,276 @@ Default class that implements SearchService but provides stuv implementation for
 
 ### constructor
 
-• **new SearchService**(`container`)
+• **new SearchService**(`__namedParameters`, `options`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `container` | `any` |
+| `__namedParameters` | `InjectedDependencies` |
+| `options` | `any` |
 
 #### Overrides
 
-SearchService.constructor
+AbstractSearchService.constructor
 
 #### Defined in
 
-[services/search.js:8](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L8)
+[medusa/src/services/search.ts:16](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L16)
 
 ## Properties
 
 ### isDefault
 
-• **isDefault**: `boolean`
+• **isDefault**: `boolean` = `true`
+
+#### Overrides
+
+AbstractSearchService.isDefault
 
 #### Defined in
 
-[services/search.js:11](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L11)
+[medusa/src/services/search.ts:11](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L11)
 
 ___
 
 ### logger\_
 
-• **logger\_**: `any`
+• `Protected` `Readonly` **logger\_**: `Logger`
 
 #### Defined in
 
-[services/search.js:13](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L13)
+[medusa/src/services/search.ts:13](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L13)
+
+___
+
+### options\_
+
+• `Protected` `Readonly` **options\_**: `Record`<`string`, `unknown`\>
+
+#### Overrides
+
+AbstractSearchService.options\_
+
+#### Defined in
+
+[medusa/src/services/search.ts:14](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L14)
+
+## Accessors
+
+### options
+
+• `get` **options**(): `Record`<`string`, `unknown`\>
+
+#### Returns
+
+`Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+AbstractSearchService.options
+
+#### Defined in
+
+utils/dist/search/abstract-service.d.ts:5
 
 ## Methods
 
 ### addDocuments
 
-▸ **addDocuments**(`indexName`, `documents`, `type`): `void`
+▸ **addDocuments**(`indexName`, `documents`, `type`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
-| `documents` | `any` |
-| `type` | `any` |
+| `indexName` | `string` |
+| `documents` | `unknown` |
+| `type` | `string` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.addDocuments
 
 #### Defined in
 
-[services/search.js:28](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L28)
+[medusa/src/services/search.ts:40](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L40)
 
 ___
 
 ### createIndex
 
-▸ **createIndex**(`indexName`, `options`): `void`
+▸ **createIndex**(`indexName`, `options`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
-| `options` | `any` |
+| `indexName` | `string` |
+| `options` | `unknown` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.createIndex
 
 #### Defined in
 
-[services/search.js:16](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L16)
+[medusa/src/services/search.ts:28](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L28)
 
 ___
 
 ### deleteAllDocuments
 
-▸ **deleteAllDocuments**(`indexName`): `void`
+▸ **deleteAllDocuments**(`indexName`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
+| `indexName` | `string` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.deleteAllDocuments
 
 #### Defined in
 
-[services/search.js:46](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L46)
+[medusa/src/services/search.ts:69](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L69)
 
 ___
 
 ### deleteDocument
 
-▸ **deleteDocument**(`indexName`, `document_id`): `void`
+▸ **deleteDocument**(`indexName`, `document_id`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
-| `document_id` | `any` |
+| `indexName` | `string` |
+| `document_id` | `string` \| `number` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.deleteDocument
 
 #### Defined in
 
-[services/search.js:40](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L40)
+[medusa/src/services/search.ts:60](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L60)
 
 ___
 
 ### getIndex
 
-▸ **getIndex**(`indexName`): `void`
+▸ **getIndex**(`indexName`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
+| `indexName` | `string` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.getIndex
 
 #### Defined in
 
-[services/search.js:22](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L22)
+[medusa/src/services/search.ts:34](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L34)
 
 ___
 
 ### replaceDocuments
 
-▸ **replaceDocuments**(`indexName`, `documents`, `type`): `void`
+▸ **replaceDocuments**(`indexName`, `documents`, `type`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
-| `documents` | `any` |
-| `type` | `any` |
+| `indexName` | `string` |
+| `documents` | `unknown` |
+| `type` | `string` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.replaceDocuments
 
 #### Defined in
 
-[services/search.js:34](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L34)
+[medusa/src/services/search.ts:50](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L50)
 
 ___
 
 ### search
 
-▸ **search**(`indexName`, `query`, `options`): `Object`
+▸ **search**(`indexName`, `query`, `options`): `Promise`<{ `hits`: `unknown`[]  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
-| `query` | `any` |
-| `options` | `any` |
+| `indexName` | `string` |
+| `query` | `unknown` |
+| `options` | `unknown` |
 
 #### Returns
 
-`Object`
+`Promise`<{ `hits`: `unknown`[]  }\>
 
-| Name | Type |
-| :------ | :------ |
-| `hits` | `never`[] |
+#### Overrides
+
+AbstractSearchService.search
 
 #### Defined in
 
-[services/search.js:52](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L52)
+[medusa/src/services/search.ts:75](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L75)
 
 ___
 
 ### updateSettings
 
-▸ **updateSettings**(`indexName`, `settings`): `void`
+▸ **updateSettings**(`indexName`, `settings`): `Promise`<`void`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `indexName` | `any` |
-| `settings` | `any` |
+| `indexName` | `string` |
+| `settings` | `unknown` |
 
 #### Returns
 
-`void`
+`Promise`<`void`\>
+
+#### Overrides
+
+AbstractSearchService.updateSettings
 
 #### Defined in
 
-[services/search.js:59](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/search.js#L59)
+[medusa/src/services/search.ts:86](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/search.ts#L86)

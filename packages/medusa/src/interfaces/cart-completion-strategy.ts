@@ -1,4 +1,5 @@
-import { IdempotencyKey } from "../models/idempotency-key"
+import { TransactionBaseService } from "@medusajs/utils"
+import { IdempotencyKey } from "../models"
 import { RequestContext } from "../types/request"
 
 export type CartCompletionResponse = {
@@ -6,7 +7,7 @@ export type CartCompletionResponse = {
   response_code: number
 
   /** The response body for the completion request */
-  response_body: object
+  response_body: Record<string, unknown>
 }
 
 export interface ICartCompletionStrategy {
@@ -25,9 +26,20 @@ export interface ICartCompletionStrategy {
   ): Promise<CartCompletionResponse>
 }
 
-export function isCartCompletionStrategy(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  object: any
-): object is ICartCompletionStrategy {
-  return typeof object.complete === "function"
+export abstract class AbstractCartCompletionStrategy
+  extends TransactionBaseService
+  implements ICartCompletionStrategy
+{
+  abstract complete(
+    cartId: string,
+    idempotencyKey: IdempotencyKey,
+    context: RequestContext
+  ): Promise<CartCompletionResponse>
+}
+
+export function isCartCompletionStrategy(obj: unknown): boolean {
+  return (
+    typeof (obj as AbstractCartCompletionStrategy).complete === "function" ||
+    obj instanceof AbstractCartCompletionStrategy
+  )
 }

@@ -15,11 +15,7 @@ describe("Get variant by id", () => {
     it("calls get variant from variantSerice", () => {
       expect(ProductVariantServiceMock.retrieve).toHaveBeenCalledTimes(1)
       expect(ProductVariantServiceMock.retrieve).toHaveBeenCalledWith("1", {
-        relations: ["prices", "options"],
-        cart_id: undefined,
-        currency_code: undefined,
-        region_id: undefined,
-        include_discount_prices: true,
+        relations: ["prices", "options", "product"],
       })
     })
 

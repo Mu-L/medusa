@@ -67,6 +67,9 @@ export const shippingOptions = {
 }
 
 export const ShippingOptionServiceMock = {
+  withTransaction: function () {
+    return this
+  },
   retrieve: jest.fn().mockImplementation((optionId) => {
     if (optionId === IdMap.getId("return-shipping")) {
       return Promise.resolve(shippingOptions.returnShipping)
@@ -86,6 +89,7 @@ export const ShippingOptionServiceMock = {
     return Promise.resolve(undefined)
   }),
   update: jest.fn().mockReturnValue(Promise.resolve()),
+  updateShippingprofile: jest.fn().mockReturnValue(Promise.resolve()),
   listAndCount: jest.fn().mockImplementation((data) => {
     if (data.region_id === IdMap.getId("region-france")) {
       return Promise.resolve([[shippingOptions.franceShipping], 1])

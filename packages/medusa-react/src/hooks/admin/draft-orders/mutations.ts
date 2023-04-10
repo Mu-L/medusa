@@ -5,9 +5,14 @@ import {
   AdminPostDraftOrdersDraftOrderLineItemsReq,
   AdminPostDraftOrdersDraftOrderRegisterPaymentRes,
   AdminPostDraftOrdersDraftOrderReq,
+  AdminPostDraftOrdersReq,
 } from "@medusajs/medusa"
 import { Response } from "@medusajs/medusa-js"
-import { useMutation, UseMutationOptions, useQueryClient } from "react-query"
+import {
+  useMutation,
+  UseMutationOptions,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { useMedusa } from "../../../contexts/medusa"
 import { buildOptions } from "../../utils/buildOptions"
 import { adminDraftOrderKeys } from "./queries"
@@ -16,13 +21,13 @@ export const useAdminCreateDraftOrder = (
   options?: UseMutationOptions<
     Response<AdminDraftOrdersRes>,
     Error,
-    AdminPostDraftOrdersDraftOrderReq
+    AdminPostDraftOrdersReq
   >
 ) => {
   const { client } = useMedusa()
   const queryClient = useQueryClient()
   return useMutation(
-    (payload: AdminPostDraftOrdersDraftOrderReq) =>
+    (payload: AdminPostDraftOrdersReq) =>
       client.admin.draftOrders.create(payload),
     buildOptions(queryClient, adminDraftOrderKeys.lists(), options)
   )

@@ -16,9 +16,10 @@ const {
   PaymentSession,
   CustomerGroup,
   PriceList,
+  ShippingProfileType,
 } = require("@medusajs/medusa")
 
-module.exports = async (connection, data = {}) => {
+module.exports = async (dataSource, data = {}) => {
   const yesterday = ((today) => new Date(today.setDate(today.getDate() - 1)))(
     new Date()
   )
@@ -31,14 +32,14 @@ module.exports = async (connection, data = {}) => {
   const tenDaysFromToday = ((today) =>
     new Date(today.setDate(today.getDate() + 10)))(new Date())
 
-  const manager = connection.manager
+  const manager = dataSource.manager
 
   const defaultProfile = await manager.findOne(ShippingProfile, {
-    type: "default",
+    where: { type: ShippingProfileType.DEFAULT },
   })
 
   const gcProfile = await manager.findOne(ShippingProfile, {
-    type: "gift_card",
+    where: { type: ShippingProfileType.GIFT_CARD },
   })
 
   await manager.insert(Address, {
@@ -50,11 +51,22 @@ module.exports = async (connection, data = {}) => {
   const r = manager.create(Region, {
     id: "test-region",
     name: "Test Region",
+    payment_providers: [{ id: "test-pay" }],
     currency_code: "usd",
     tax_rate: 0,
   })
 
   await manager.save(r)
+
+  const europeRegion = manager.create(Region, {
+    id: "eur-region",
+    name: "Europe Region",
+    payment_providers: [{ id: "test-pay" }],
+    currency_code: "eur",
+    tax_rate: 0,
+  })
+
+  await manager.save(europeRegion)
 
   // Region with multiple countries
   const regionWithMultipleCoutries = manager.create(Region, {
@@ -140,7 +152,7 @@ module.exports = async (connection, data = {}) => {
     ends_at: tenDaysFromToday,
   })
 
-  tenPercent.regions = [r]
+  tenPercent.regions = [r, europeRegion]
   tenPercent.rule = tenPercentRule
   await manager.save(tenPercent)
 
@@ -316,7 +328,7 @@ module.exports = async (connection, data = {}) => {
     is_dynamic: true,
     is_disabled: false,
     starts_at: tenDaysAgo,
-    ends_at: tenDaysFromToday,
+    ends_at: yesterday,
     valid_duration: "P1D", // one day
   })
 
@@ -531,6 +543,14 @@ module.exports = async (connection, data = {}) => {
     amount: 1000,
   })
   await manager.save(ma)
+
+  const maEur = manager.create(MoneyAmount, {
+    variant_id: "test-variant",
+    currency_code: "eur",
+    type: "default",
+    amount: 2000,
+  })
+  await manager.save(maEur)
 
   const ma_sale = manager.create(MoneyAmount, {
     variant_id: "test-variant-sale",
@@ -819,6 +839,23 @@ module.exports = async (connection, data = {}) => {
     completed_at: null,
     items: [],
   })
+
+  await manager.save(cart3)
+
+  const ps = manager.create(PaymentSession, {
+    id: "test-cart-session",
+    cart_id: "test-cart-3",
+    provider_id: "test-pay",
+    is_selected: true,
+    data: {},
+    status: "authorized",
+  })
+
+  await manager.save(ps)
+
+  cart3.payment_sessions = [ps]
+  cart3.payment_session = ps
+
   await manager.save(cart3)
 
   await manager.insert(ShippingMethod, {
@@ -842,7 +879,7 @@ module.exports = async (connection, data = {}) => {
   await manager.save(li2)
 
   const cart4 = manager.create(Cart, {
-    id: "test-cart-3",
+    id: "test-cart-4",
     email: "some-customer@email.com",
     shipping_address: {
       id: "test-shipping-address",

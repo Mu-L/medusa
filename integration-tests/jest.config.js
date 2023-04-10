@@ -14,6 +14,7 @@ module.exports = {
   projects: [
     "<rootDir>/integration-tests/api/jest.config.js",
     "<rootDir>/integration-tests/plugins/jest.config.js",
+    "<rootDir>/integration-tests/repositories/jest.config.js",
   ],
   testPathIgnorePatterns: [
     `/examples/`,
@@ -25,5 +26,6 @@ module.exports = {
     `.cache`,
   ],
   transform: { "^.+\\.[jt]s$": `<rootDir>/jest-transformer.js` },
+  setupFiles: ["<rootDir>/integration-tests/setup-env.js"],
   setupFilesAfterEnv: ["<rootDir>/integration-tests/setup.js"],
 }

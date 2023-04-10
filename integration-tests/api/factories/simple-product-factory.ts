@@ -5,13 +5,18 @@ import {
   ProductType,
   ShippingProfile,
   ShippingProfileType,
+  Store,
 } from "@medusajs/medusa"
 import faker from "faker"
-import { Connection } from "typeorm"
+import { DataSource } from "typeorm"
 import {
   ProductVariantFactoryData,
   simpleProductVariantFactory,
 } from "./simple-product-variant-factory"
+import {
+  SalesChannelFactoryData,
+  simpleSalesChannelFactory,
+} from "./simple-sales-channel-factory"
 
 export type ProductFactoryData = {
   id?: string
@@ -22,26 +27,59 @@ export type ProductFactoryData = {
   tags?: string[]
   options?: { id: string; title: string }[]
   variants?: ProductVariantFactoryData[]
+  sales_channels?: SalesChannelFactoryData[]
+  metadata?: Record<string, unknown>
 }
 
 export const simpleProductFactory = async (
-  connection: Connection,
+  dataSource: DataSource,
   data: ProductFactoryData = {},
   seed?: number
-): Promise<Product | undefined> => {
+): Promise<Product | undefined | null> => {
   if (typeof seed !== "undefined") {
     faker.seed(seed)
   }
 
-  const manager = connection.manager
+  const manager = dataSource.manager
 
   const defaultProfile = await manager.findOne(ShippingProfile, {
-    type: ShippingProfileType.DEFAULT,
+    where: {
+      type: ShippingProfileType.DEFAULT,
+    }
   })
 
   const gcProfile = await manager.findOne(ShippingProfile, {
-    type: ShippingProfileType.GIFT_CARD,
+    where: {
+      type: ShippingProfileType.GIFT_CARD,
+    }
   })
+
+  let sales_channels
+  if (data.sales_channels) {
+    sales_channels = await Promise.all(
+      data.sales_channels.map(
+        async (salesChannel) =>
+          await simpleSalesChannelFactory(dataSource, salesChannel)
+      )
+    )
+  } else {
+    const stores = await manager.find(Store, {
+      relations: { default_sales_channel: true },
+    })
+
+    const store = stores[0]
+
+    if (store?.default_sales_channel) {
+      sales_channels = [store.default_sales_channel]
+    } else {
+      const salesChannel = await simpleSalesChannelFactory(dataSource, {
+        id: `default-${Math.random() * 1000}`,
+        is_default: true,
+      })
+
+      sales_channels = [salesChannel]
+    }
+  }
 
   const prodId = data.id || `simple-product-${Math.random() * 1000}`
   const productToCreate = {
@@ -52,6 +90,7 @@ export const simpleProductFactory = async (
     discountable: !data.is_giftcard,
     tags: [] as ProductTag[],
     profile_id: data.is_giftcard ? gcProfile?.id : defaultProfile?.id,
+    metadata: data.metadata || null,
   } as Product
 
   if (typeof data.tags !== "undefined") {
@@ -76,6 +115,8 @@ export const simpleProductFactory = async (
   }
 
   const toSave = manager.create(Product, productToCreate)
+
+  toSave.sales_channels = sales_channels
 
   await manager.save(toSave)
 
@@ -109,8 +150,16 @@ export const simpleProductFactory = async (
         { option_id: optionId, value: faker.commerce.productAdjective() },
       ]
     }
-    await simpleProductVariantFactory(connection, factoryData)
+    await simpleProductVariantFactory(dataSource, factoryData)
   }
 
-  return manager.findOne(Product, { id: prodId }, { relations: ["tags", "variants", "variants.prices"] })
+  return await manager.findOne(
+    Product,
+    {
+      where: {
+        id: prodId
+      },
+      relations: { tags: true, variants: { prices: true }}
+    }
+  )
 }

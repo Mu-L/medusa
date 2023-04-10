@@ -4,7 +4,7 @@ Provides layer to manipulate profiles.
 
 ## Hierarchy
 
-- `"medusa-interfaces"`
+- `TransactionBaseService`
 
   ↳ **`ShippingOptionService`**
 
@@ -18,21 +18,169 @@ Provides layer to manipulate profiles.
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
+| `__namedParameters` | `InjectedDependencies` |
 
 #### Overrides
 
-BaseService.constructor
+TransactionBaseService.constructor
 
 #### Defined in
 
-[services/shipping-option.js:9](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L9)
+[medusa/src/services/shipping-option.ts:52](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L52)
+
+## Properties
+
+### \_\_configModule\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_configModule\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_configModule\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:14](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L14)
+
+___
+
+### \_\_container\_\_
+
+• `Protected` `Readonly` **\_\_container\_\_**: `any`
+
+#### Inherited from
+
+TransactionBaseService.\_\_container\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:13](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L13)
+
+___
+
+### \_\_moduleDeclaration\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_moduleDeclaration\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_moduleDeclaration\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:15](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L15)
+
+___
+
+### featureFlagRouter\_
+
+• `Protected` `Readonly` **featureFlagRouter\_**: `FlagRouter`
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:50](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L50)
+
+___
+
+### manager\_
+
+• `Protected` **manager\_**: `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.manager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:5](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L5)
+
+___
+
+### methodRepository\_
+
+• `Protected` `Readonly` **methodRepository\_**: `Repository`<`ShippingMethod`\>
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:49](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L49)
+
+___
+
+### optionRepository\_
+
+• `Protected` `Readonly` **optionRepository\_**: `Repository`<`ShippingOption`\> & { `upsertShippingProfile`: (`shippingOptionIds`: `string`[], `shippingProfileId`: `string`) => `Promise`<`ShippingOption`[]\>  }
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:48](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L48)
+
+___
+
+### providerService\_
+
+• `Protected` `Readonly` **providerService\_**: [`FulfillmentProviderService`](FulfillmentProviderService.md)
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:44](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L44)
+
+___
+
+### regionService\_
+
+• `Protected` `Readonly` **regionService\_**: [`RegionService`](RegionService.md)
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:45](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L45)
+
+___
+
+### requirementRepository\_
+
+• `Protected` `Readonly` **requirementRepository\_**: `Repository`<`ShippingOptionRequirement`\>
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:47](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L47)
+
+___
+
+### transactionManager\_
+
+• `Protected` **transactionManager\_**: `undefined` \| `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.transactionManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:6](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L6)
+
+## Accessors
+
+### activeManager\_
+
+• `Protected` `get` **activeManager_**(): `EntityManager`
+
+#### Returns
+
+`EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.activeManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:8](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L8)
 
 ## Methods
 
 ### addRequirement
 
-▸ **addRequirement**(`optionId`, `requirement`): `Promise`<`any`\>
+▸ **addRequirement**(`optionId`, `requirement`): `Promise`<`ShippingOption`\>
 
 Adds a requirement to a shipping option. Only 1 requirement of each type
 is allowed.
@@ -42,17 +190,56 @@ is allowed.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `optionId` | `string` | the option to add the requirement to. |
-| `requirement` | `ShippingRequirement` | the requirement for the option. |
+| `requirement` | `ShippingOptionRequirement` | the requirement for the option. |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`ShippingOption`\>
 
 the result of update
 
 #### Defined in
 
-[services/shipping-option.js:594](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L594)
+[medusa/src/services/shipping-option.ts:693](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L693)
+
+___
+
+### atomicPhase\_
+
+▸ `Protected` **atomicPhase_**<`TResult`, `TError`\>(`work`, `isolationOrErrorHandler?`, `maybeErrorHandlerOrDontFail?`): `Promise`<`TResult`\>
+
+Wraps some work within a transactional block. If the service already has
+a transaction manager attached this will be reused, otherwise a new
+transaction manager is created.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `TResult` |
+| `TError` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `work` | (`transactionManager`: `EntityManager`) => `Promise`<`TResult`\> | the transactional work to be done |
+| `isolationOrErrorHandler?` | `IsolationLevel` \| (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | the isolation level to be used for the work. |
+| `maybeErrorHandlerOrDontFail?` | (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | Potential error handler |
+
+#### Returns
+
+`Promise`<`TResult`\>
+
+the result of the transactional work
+
+#### Inherited from
+
+TransactionBaseService.atomicPhase\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:56](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L56)
 
 ___
 
@@ -68,7 +255,7 @@ defaults to false.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `data` | `ShippingOption` | the data to create shipping options |
+| `data` | `CreateShippingOptionInput` | the data to create shipping options |
 
 #### Returns
 
@@ -78,13 +265,13 @@ the result of the create operation
 
 #### Defined in
 
-[services/shipping-option.js:350](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L350)
+[medusa/src/services/shipping-option.ts:431](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L431)
 
 ___
 
 ### createShippingMethod
 
-▸ **createShippingMethod**(`optionId`, `data`, `config`): `ShippingMethod`
+▸ **createShippingMethod**(`optionId`, `data`, `config`): `Promise`<`ShippingMethod`\>
 
 Creates a shipping method for a given cart.
 
@@ -93,50 +280,24 @@ Creates a shipping method for a given cart.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `optionId` | `string` | the id of the option to use for the method. |
-| `data` | `any` | the optional provider data to use. |
-| `config` | `any` | the cart to create the shipping method for. |
+| `data` | `Record`<`string`, `unknown`\> | the optional provider data to use. |
+| `config` | `CreateShippingMethodDto` | the cart to create the shipping method for. |
 
 #### Returns
 
-`ShippingMethod`
+`Promise`<`ShippingMethod`\>
 
 the resulting shipping method.
 
 #### Defined in
 
-[services/shipping-option.js:231](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L231)
-
-___
-
-### decorate
-
-▸ **decorate**(`optionId`, `fields?`, `expandFields?`): `ShippingOption`
-
-Decorates a shipping option.
-
-#### Parameters
-
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `optionId` | `ShippingOption` | `undefined` | the shipping option to decorate using optionId. |
-| `fields` | `string`[] | `[]` | the fields to include. |
-| `expandFields` | `string`[] | `[]` | fields to expand. |
-
-#### Returns
-
-`ShippingOption`
-
-the decorated ShippingOption.
-
-#### Defined in
-
-[services/shipping-option.js:645](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L645)
+[medusa/src/services/shipping-option.ts:258](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L258)
 
 ___
 
 ### delete
 
-▸ **delete**(`optionId`): `Promise`<`any`\>
+▸ **delete**(`optionId`): `Promise`<`void` \| `ShippingOption`\>
 
 Deletes a profile with a given profile id.
 
@@ -148,19 +309,19 @@ Deletes a profile with a given profile id.
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`void` \| `ShippingOption`\>
 
 the result of the delete operation.
 
 #### Defined in
 
-[services/shipping-option.js:566](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L566)
+[medusa/src/services/shipping-option.ts:671](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L671)
 
 ___
 
 ### deleteShippingMethods
 
-▸ **deleteShippingMethods**(`shippingMethods`): `Promise`<`any`\>
+▸ **deleteShippingMethods**(`shippingMethods`): `Promise`<`ShippingMethod`[]\>
 
 Removes a given shipping method
 
@@ -168,15 +329,17 @@ Removes a given shipping method
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `shippingMethods` | `any` | the shipping method to remove |
+| `shippingMethods` | `ShippingMethod` \| `ShippingMethod`[] | the shipping method to remove |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`ShippingMethod`[]\>
+
+removed shipping methods
 
 #### Defined in
 
-[services/shipping-option.js:213](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L213)
+[medusa/src/services/shipping-option.ts:238](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L238)
 
 ___
 
@@ -193,8 +356,8 @@ price type "calculated".
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `option` | `ShippingOption` | the shipping option to retrieve the price   for. |
-| `data` | `ShippingData` | the shipping data to retrieve the price. |
-| `cart` | `any` | the context in which the price should be   retrieved. |
+| `data` | `Record`<`string`, `unknown`\> | the shipping data to retrieve the price. |
+| `cart` | `undefined` \| `Order` \| `Cart` | the context in which the price should be   retrieved. |
 
 #### Returns
 
@@ -204,59 +367,59 @@ the price of the shipping option.
 
 #### Defined in
 
-[services/shipping-option.js:697](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L697)
+[medusa/src/services/shipping-option.ts:771](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L771)
 
 ___
 
 ### list
 
-▸ **list**(`selector`, `config?`): `Promise`<`any`\>
+▸ **list**(`selector`, `config?`): `Promise`<`ShippingOption`[]\>
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | `any` | the query object for find |
-| `config` | `any` | config object |
+| `selector` | `Selector`<`ShippingMethod`\> | the query object for find |
+| `config` | `FindConfig`<`ShippingOption`\> | config object |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`ShippingOption`[]\>
 
 the result of the find operation
 
 #### Defined in
 
-[services/shipping-option.js:123](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L123)
+[medusa/src/services/shipping-option.ts:145](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L145)
 
 ___
 
 ### listAndCount
 
-▸ **listAndCount**(`selector`, `config?`): `Promise`<`any`\>
+▸ **listAndCount**(`selector`, `config?`): `Promise`<[`ShippingOption`[], `number`]\>
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | `any` | the query object for find |
-| `config` | `any` | config object |
+| `selector` | `Selector`<`ShippingOption`\> | the query object for find |
+| `config` | `FindConfig`<`ShippingOption`\> | config object |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<[`ShippingOption`[], `number`]\>
 
 the result of the find operation
 
 #### Defined in
 
-[services/shipping-option.js:135](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L135)
+[medusa/src/services/shipping-option.ts:160](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L160)
 
 ___
 
 ### removeRequirement
 
-▸ **removeRequirement**(`requirementId`): `Promise`<`any`\>
+▸ **removeRequirement**(`requirementId`): `Promise`<`void` \| `ShippingOptionRequirement`\>
 
 Removes a requirement from a shipping option
 
@@ -264,23 +427,23 @@ Removes a requirement from a shipping option
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `requirementId` | `string` | the id of the requirement to remove |
+| `requirementId` | `any` | the id of the requirement to remove |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`void` \| `ShippingOptionRequirement`\>
 
 the result of update
 
 #### Defined in
 
-[services/shipping-option.js:620](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L620)
+[medusa/src/services/shipping-option.ts:722](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L722)
 
 ___
 
 ### retrieve
 
-▸ **retrieve**(`optionId`, `options?`): `Promise`<`Product`\>
+▸ **retrieve**(`optionId`, `options?`): `Promise`<`ShippingOption`\>
 
 Gets a profile by id.
 Throws in case of DB Error and if profile was not found.
@@ -289,49 +452,48 @@ Throws in case of DB Error and if profile was not found.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `optionId` | `string` | the id of the profile to get. |
-| `options` | `any` | the options to get a profile |
+| `optionId` | `any` | the id of the profile to get. |
+| `options` | `FindConfig`<`ShippingOption`\> | the options to get a profile |
 
 #### Returns
 
-`Promise`<`Product`\>
+`Promise`<`ShippingOption`\>
 
 the profile document.
 
 #### Defined in
 
-[services/shipping-option.js:149](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L149)
+[medusa/src/services/shipping-option.ts:177](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L177)
 
 ___
 
-### setMetadata\_
+### shouldRetryTransaction\_
 
-▸ **setMetadata_**(`option`, `metadata`): `Promise`<`any`\>
-
-Dedicated method to set metadata for a shipping option.
+▸ `Protected` **shouldRetryTransaction_**(`err`): `boolean`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `option` | `any` | the option to set metadata for. |
-| `metadata` | `any` | object for metadata field |
+| Name | Type |
+| :------ | :------ |
+| `err` | `Record`<`string`, `unknown`\> \| { `code`: `string`  } |
 
 #### Returns
 
-`Promise`<`any`\>
+`boolean`
 
-resolves to the updated result.
+#### Inherited from
+
+TransactionBaseService.shouldRetryTransaction\_
 
 #### Defined in
 
-[services/shipping-option.js:664](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L664)
+[medusa/src/interfaces/transaction-base-service.ts:37](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L37)
 
 ___
 
 ### update
 
-▸ **update**(`optionId`, `update`): `Promise`<`any`\>
+▸ **update**(`optionId`, `update`): `Promise`<`ShippingOption`\>
 
 Updates a profile. Metadata updates and product updates should use
 dedicated methods, e.g. `setMetadata`, etc. The function
@@ -342,23 +504,23 @@ will throw errors if metadata or product updates are attempted.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `optionId` | `string` | the id of the option. Must be a string that   can be casted to an ObjectId |
-| `update` | `any` | an object with the update values. |
+| `update` | `UpdateShippingOptionInput` | an object with the update values. |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`ShippingOption`\>
 
 resolves to the update result.
 
 #### Defined in
 
-[services/shipping-option.js:464](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L464)
+[medusa/src/services/shipping-option.ts:559](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L559)
 
 ___
 
 ### updateShippingMethod
 
-▸ **updateShippingMethod**(`id`, `update`): `Promise`<`ShippingMethod`\>
+▸ **updateShippingMethod**(`id`, `update`): `Promise`<`undefined` \| `ShippingMethod`\>
 
 Updates a shipping method's associations. Useful when a cart is completed
 and its methods should be copied to an order/swap entity.
@@ -368,23 +530,67 @@ and its methods should be copied to an order/swap entity.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `id` | `string` | the id of the shipping method to update |
-| `update` | `any` | the values to update the method with |
+| `update` | `ShippingMethodUpdate` | the values to update the method with |
 
 #### Returns
 
-`Promise`<`ShippingMethod`\>
+`Promise`<`undefined` \| `ShippingMethod`\>
 
 the resulting shipping method
 
 #### Defined in
 
-[services/shipping-option.js:184](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L184)
+[medusa/src/services/shipping-option.ts:211](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L211)
+
+___
+
+### updateShippingProfile
+
+▸ **updateShippingProfile**(`optionIds`, `profileId`): `Promise`<`ShippingOption`[]\>
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `optionIds` | `string` \| `string`[] | ID or IDs of the shipping options to update |
+| `profileId` | `string` | Shipping profile ID to update the shipping options with |
+
+#### Returns
+
+`Promise`<`ShippingOption`[]\>
+
+updated shipping options
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:747](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L747)
+
+___
+
+### validateAndMutatePrice
+
+▸ `Private` **validateAndMutatePrice**(`option`, `priceInput`): `Promise`<`CreateShippingOptionInput` \| `Omit`<`ShippingOption`, ``"beforeInsert"``\>\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `option` | `ShippingOption` \| `CreateShippingOptionInput` |
+| `priceInput` | `ValidatePriceTypeAndAmountInput` |
+
+#### Returns
+
+`Promise`<`CreateShippingOptionInput` \| `Omit`<`ShippingOption`, ``"beforeInsert"``\>\>
+
+#### Defined in
+
+[medusa/src/services/shipping-option.ts:388](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L388)
 
 ___
 
 ### validateCartOption
 
-▸ **validateCartOption**(`option`, `cart`): `ShippingOption`
+▸ **validateCartOption**(`option`, `cart`): `Promise`<``null`` \| `ShippingOption`\>
 
 Checks if a given option id is a valid option for a cart. If it is the
 option is returned with the correct price. Throws when region_ids do not
@@ -394,24 +600,24 @@ match, or when the shipping option requirements are not satisfied.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `option` | `any` | the option object to check |
+| `option` | `ShippingOption` | the option object to check |
 | `cart` | `Cart` | the cart object to check against |
 
 #### Returns
 
-`ShippingOption`
+`Promise`<``null`` \| `ShippingOption`\>
 
 the validated shipping option
 
 #### Defined in
 
-[services/shipping-option.js:309](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L309)
+[medusa/src/services/shipping-option.ts:346](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L346)
 
 ___
 
 ### validatePriceType\_
 
-▸ **validatePriceType_**(`priceType`, `option`): `Promise`<`ShippingOptionPrice`\>
+▸ **validatePriceType_**(`priceType`, `option`): `Promise`<`ShippingOptionPriceType`\>
 
 Validates a shipping option price
 
@@ -419,60 +625,64 @@ Validates a shipping option price
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `priceType` | `ShippingOptionPrice` | the price to validate |
+| `priceType` | `ShippingOptionPriceType` | the price to validate |
 | `option` | `ShippingOption` | the option to validate against |
 
 #### Returns
 
-`Promise`<`ShippingOptionPrice`\>
+`Promise`<`ShippingOptionPriceType`\>
 
 the validated price
 
 #### Defined in
 
-[services/shipping-option.js:431](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L431)
+[medusa/src/services/shipping-option.ts:519](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L519)
 
 ___
 
 ### validateRequirement\_
 
-▸ **validateRequirement_**(`requirement`, `optionId`): `ShippingRequirement`
+▸ **validateRequirement_**(`requirement`, `optionId?`): `Promise`<`ShippingOptionRequirement`\>
 
 Validates a requirement
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `requirement` | `ShippingRequirement` | the requirement to validate |
-| `optionId` | `string` | the id to validate the requirement |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `requirement` | `ShippingOptionRequirement` | `undefined` | the requirement to validate |
+| `optionId` | `undefined` \| `string` | `undefined` | the id to validate the requirement |
 
 #### Returns
 
-`ShippingRequirement`
+`Promise`<`ShippingOptionRequirement`\>
 
 a validated shipping requirement
 
 #### Defined in
 
-[services/shipping-option.js:63](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L63)
+[medusa/src/services/shipping-option.ts:77](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/shipping-option.ts#L77)
 
 ___
 
 ### withTransaction
 
-▸ **withTransaction**(`transactionManager`): [`ShippingOptionService`](ShippingOptionService.md)
+▸ **withTransaction**(`transactionManager?`): [`ShippingOptionService`](ShippingOptionService.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `transactionManager` | `any` |
+| `transactionManager?` | `EntityManager` |
 
 #### Returns
 
 [`ShippingOptionService`](ShippingOptionService.md)
 
+#### Inherited from
+
+TransactionBaseService.withTransaction
+
 #### Defined in
 
-[services/shipping-option.js:38](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/shipping-option.js#L38)
+[medusa/src/interfaces/transaction-base-service.ts:20](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L20)

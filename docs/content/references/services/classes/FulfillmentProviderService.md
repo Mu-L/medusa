@@ -2,6 +2,12 @@
 
 Helps retrive fulfillment providers
 
+## Hierarchy
+
+- `TransactionBaseService`
+
+  ↳ **`FulfillmentProviderService`**
+
 ## Constructors
 
 ### constructor
@@ -12,150 +18,301 @@ Helps retrive fulfillment providers
 
 | Name | Type |
 | :------ | :------ |
-| `container` | `any` |
+| `container` | `FulfillmentProviderContainer` |
+
+#### Overrides
+
+TransactionBaseService.constructor
 
 #### Defined in
 
-[services/fulfillment-provider.js:7](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L7)
+[medusa/src/services/fulfillment-provider.ts:44](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L44)
+
+## Properties
+
+### \_\_configModule\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_configModule\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_configModule\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:14](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L14)
+
+___
+
+### \_\_container\_\_
+
+• `Protected` `Readonly` **\_\_container\_\_**: `any`
+
+#### Inherited from
+
+TransactionBaseService.\_\_container\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:13](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L13)
+
+___
+
+### \_\_moduleDeclaration\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_moduleDeclaration\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_moduleDeclaration\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:15](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L15)
+
+___
+
+### container\_
+
+• `Protected` `Readonly` **container\_**: `FulfillmentProviderContainer`
+
+#### Defined in
+
+[medusa/src/services/fulfillment-provider.ts:40](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L40)
+
+___
+
+### fulfillmentProviderRepository\_
+
+• `Protected` `Readonly` **fulfillmentProviderRepository\_**: `Repository`<`FulfillmentProvider`\>
+
+#### Defined in
+
+[medusa/src/services/fulfillment-provider.ts:42](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L42)
+
+___
+
+### manager\_
+
+• `Protected` **manager\_**: `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.manager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:5](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L5)
+
+___
+
+### transactionManager\_
+
+• `Protected` **transactionManager\_**: `undefined` \| `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.transactionManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:6](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L6)
+
+## Accessors
+
+### activeManager\_
+
+• `Protected` `get` **activeManager_**(): `EntityManager`
+
+#### Returns
+
+`EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.activeManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:8](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L8)
 
 ## Methods
 
+### atomicPhase\_
+
+▸ `Protected` **atomicPhase_**<`TResult`, `TError`\>(`work`, `isolationOrErrorHandler?`, `maybeErrorHandlerOrDontFail?`): `Promise`<`TResult`\>
+
+Wraps some work within a transactional block. If the service already has
+a transaction manager attached this will be reused, otherwise a new
+transaction manager is created.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `TResult` |
+| `TError` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `work` | (`transactionManager`: `EntityManager`) => `Promise`<`TResult`\> | the transactional work to be done |
+| `isolationOrErrorHandler?` | `IsolationLevel` \| (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | the isolation level to be used for the work. |
+| `maybeErrorHandlerOrDontFail?` | (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | Potential error handler |
+
+#### Returns
+
+`Promise`<`TResult`\>
+
+the result of the transactional work
+
+#### Inherited from
+
+TransactionBaseService.atomicPhase\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:56](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L56)
+
+___
+
 ### calculatePrice
 
-▸ **calculatePrice**(`option`, `data`, `cart`): `Promise`<`any`\>
+▸ **calculatePrice**(`option`, `data`, `cart?`): `Promise`<`number`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `option` | `any` |
-| `data` | `any` |
-| `cart` | `any` |
+| `option` | `ShippingOption` |
+| `data` | `Record`<`string`, `unknown`\> |
+| `cart?` | `Order` \| `Cart` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`number`\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:79](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L79)
+[medusa/src/services/fulfillment-provider.ts:147](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L147)
 
 ___
 
 ### canCalculate
 
-▸ **canCalculate**(`option`): `Promise`<`any`\>
+▸ **canCalculate**(`option`): `Promise`<`boolean`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `option` | `any` |
+| `option` | `CalculateOptionPriceInput` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:64](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L64)
+[medusa/src/services/fulfillment-provider.ts:122](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L122)
 
 ___
 
 ### cancelFulfillment
 
-▸ **cancelFulfillment**(`fulfillment`): `Promise`<`any`\>
+▸ **cancelFulfillment**(`fulfillment`): `Promise`<`Fulfillment`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `fulfillment` | `any` |
+| `fulfillment` | `Fulfillment` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`Fulfillment`\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:74](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L74)
+[medusa/src/services/fulfillment-provider.ts:140](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L140)
 
 ___
 
 ### createFulfillment
 
-▸ **createFulfillment**(`method`, `items`, `order`, `fulfillment`): `Promise`<`any`\>
+▸ **createFulfillment**(`method`, `items`, `order`, `fulfillment`): `Promise`<`Record`<`string`, `unknown`\>\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `method` | `any` |
-| `items` | `any` |
-| `order` | `any` |
-| `fulfillment` | `any` |
+| `method` | `ShippingMethod` |
+| `items` | `LineItem`[] |
+| `order` | `CreateFulfillmentOrder` |
+| `fulfillment` | `Omit`<`Fulfillment`, ``"beforeInsert"``\> |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`Record`<`string`, `unknown`\>\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:59](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L59)
+[medusa/src/services/fulfillment-provider.ts:107](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L107)
 
 ___
 
 ### createReturn
 
-▸ **createReturn**(`returnOrder`): `Promise`<`any`\>
+▸ **createReturn**(`returnOrder`): `Promise`<`Record`<`string`, `unknown`\>\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `returnOrder` | `any` |
+| `returnOrder` | `CreateReturnType` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`Record`<`string`, `unknown`\>\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:89](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L89)
+[medusa/src/services/fulfillment-provider.ts:165](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L165)
 
 ___
 
 ### list
 
-▸ **list**(): `Promise`<`any`\>
+▸ **list**(): `Promise`<`FulfillmentProvider`[]\>
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`FulfillmentProvider`[]\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:23](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L23)
+[medusa/src/services/fulfillment-provider.ts:67](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L67)
 
 ___
 
 ### listFulfillmentOptions
 
-▸ **listFulfillmentOptions**(`providers`): `Promise`<`any`[]\>
+▸ **listFulfillmentOptions**(`providerIds`): `Promise`<`FulfillmentOptions`[]\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `providers` | `any` |
+| `providerIds` | `string`[] |
 
 #### Returns
 
-`Promise`<`any`[]\>
+`Promise`<`FulfillmentOptions`[]\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:30](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L30)
+[medusa/src/services/fulfillment-provider.ts:75](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L75)
 
 ___
 
@@ -167,7 +324,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `providers` | `any` |
+| `providers` | `string`[] |
 
 #### Returns
 
@@ -175,7 +332,7 @@ ___
 
 #### Defined in
 
-[services/fulfillment-provider.js:12](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L12)
+[medusa/src/services/fulfillment-provider.ts:53](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L53)
 
 ___
 
@@ -190,77 +347,127 @@ Fetches documents from the fulfillment provider
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `providerId` | `string` | the id of the provider |
-| `fulfillmentData` | `any` | the data relating to the fulfillment |
-| `documentType` | ``"invoice"`` \| ``"label"`` | the typ of  document to fetch |
+| `fulfillmentData` | `Record`<`string`, `unknown`\> | the data relating to the fulfillment |
+| `documentType` | ``"label"`` \| ``"invoice"`` | the typ of |
 
 #### Returns
 
 `Promise`<`any`\>
 
+document to fetch
+
 #### Defined in
 
-[services/fulfillment-provider.js:102](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L102)
+[medusa/src/services/fulfillment-provider.ts:184](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L184)
 
 ___
 
 ### retrieveProvider
 
-▸ **retrieveProvider**(`provider_id`): `FulfillmentService`
+▸ **retrieveProvider**(`providerId`): `any`
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `provider_id` | `string` | the provider id |
+| `providerId` | `string` | the provider id |
 
 #### Returns
 
-`FulfillmentService`
+`any`
 
 the payment fulfillment provider
 
 #### Defined in
 
-[services/fulfillment-provider.js:48](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L48)
+[medusa/src/services/fulfillment-provider.ts:96](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L96)
+
+___
+
+### shouldRetryTransaction\_
+
+▸ `Protected` **shouldRetryTransaction_**(`err`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `err` | `Record`<`string`, `unknown`\> \| { `code`: `string`  } |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+TransactionBaseService.shouldRetryTransaction\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:37](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L37)
 
 ___
 
 ### validateFulfillmentData
 
-▸ **validateFulfillmentData**(`option`, `data`, `cart`): `Promise`<`any`\>
+▸ **validateFulfillmentData**(`option`, `data`, `cart`): `Promise`<`Record`<`string`, `unknown`\>\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `option` | `any` |
-| `data` | `any` |
-| `cart` | `any` |
+| `option` | `ShippingOption` |
+| `data` | `Record`<`string`, `unknown`\> |
+| `cart` | `Record`<`string`, `unknown`\> \| `Cart` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`Record`<`string`, `unknown`\>\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:69](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L69)
+[medusa/src/services/fulfillment-provider.ts:127](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L127)
 
 ___
 
 ### validateOption
 
-▸ **validateOption**(`option`): `Promise`<`any`\>
+▸ **validateOption**(`option`): `Promise`<`boolean`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `option` | `any` |
+| `option` | `ShippingOption` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[services/fulfillment-provider.js:84](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/fulfillment-provider.js#L84)
+[medusa/src/services/fulfillment-provider.ts:160](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/fulfillment-provider.ts#L160)
+
+___
+
+### withTransaction
+
+▸ **withTransaction**(`transactionManager?`): [`FulfillmentProviderService`](FulfillmentProviderService.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `transactionManager?` | `EntityManager` |
+
+#### Returns
+
+[`FulfillmentProviderService`](FulfillmentProviderService.md)
+
+#### Inherited from
+
+TransactionBaseService.withTransaction
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:20](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L20)

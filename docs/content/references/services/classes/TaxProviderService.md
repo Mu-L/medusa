@@ -4,7 +4,7 @@ Finds tax providers and assists in tax related operations.
 
 ## Hierarchy
 
-- `"medusa-interfaces"`
+- `TransactionBaseService`
 
   ↳ **`TaxProviderService`**
 
@@ -22,93 +22,230 @@ Finds tax providers and assists in tax related operations.
 
 #### Overrides
 
-BaseService.constructor
+TransactionBaseService.constructor
 
 #### Defined in
 
-[services/tax-provider.ts:44](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L44)
+[medusa/src/services/tax-provider.ts:45](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L45)
 
 ## Properties
 
-### container\_
+### \_\_configModule\_\_
 
-• `Private` **container\_**: `AwilixContainer`<`any`\>
+• `Protected` `Optional` `Readonly` **\_\_configModule\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_configModule\_\_
 
 #### Defined in
 
-[services/tax-provider.ts:35](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L35)
+[medusa/src/interfaces/transaction-base-service.ts:14](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L14)
+
+___
+
+### \_\_container\_\_
+
+• `Protected` `Readonly` **\_\_container\_\_**: `any`
+
+#### Inherited from
+
+TransactionBaseService.\_\_container\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:13](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L13)
+
+___
+
+### \_\_moduleDeclaration\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_moduleDeclaration\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_moduleDeclaration\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:15](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L15)
+
+___
+
+### cacheService\_
+
+• `Protected` `Readonly` **cacheService\_**: `ICacheService`
+
+#### Defined in
+
+[medusa/src/services/tax-provider.ts:38](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L38)
+
+___
+
+### container\_
+
+• `Protected` `Readonly` **container\_**: `AwilixContainer`<`any`\>
+
+#### Defined in
+
+[medusa/src/services/tax-provider.ts:37](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L37)
+
+___
+
+### eventBus\_
+
+• `Protected` `Readonly` **eventBus\_**: `IEventBusService`
+
+#### Defined in
+
+[medusa/src/services/tax-provider.ts:43](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L43)
 
 ___
 
 ### manager\_
 
-• `Private` **manager\_**: `EntityManager`
+• `Protected` **manager\_**: `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.manager\_
 
 #### Defined in
 
-[services/tax-provider.ts:36](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L36)
-
-___
-
-### redis\_
-
-• `Private` **redis\_**: `Redis`
-
-#### Defined in
-
-[services/tax-provider.ts:42](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L42)
+[medusa/src/interfaces/transaction-base-service.ts:5](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L5)
 
 ___
 
 ### smTaxLineRepo\_
 
-• `Private` **smTaxLineRepo\_**: typeof `ShippingMethodTaxLineRepository`
+• `Protected` `Readonly` **smTaxLineRepo\_**: `Repository`<`ShippingMethodTaxLine`\> & { `deleteForCart`: (`cartId`: `string`) => `Promise`<`void`\> ; `upsertLines`: (`lines`: `ShippingMethodTaxLine`[]) => `Promise`<`ShippingMethodTaxLine`[]\>  }
 
 #### Defined in
 
-[services/tax-provider.ts:40](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L40)
+[medusa/src/services/tax-provider.ts:41](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L41)
 
 ___
 
 ### taxLineRepo\_
 
-• `Private` **taxLineRepo\_**: typeof `LineItemTaxLineRepository`
+• `Protected` `Readonly` **taxLineRepo\_**: `Repository`<`LineItemTaxLine`\> & { `deleteForCart`: (`cartId`: `string`) => `Promise`<`void`\> ; `upsertLines`: (`lines`: `LineItemTaxLine`[]) => `Promise`<`LineItemTaxLine`[]\>  }
 
 #### Defined in
 
-[services/tax-provider.ts:39](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L39)
+[medusa/src/services/tax-provider.ts:40](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L40)
 
 ___
 
 ### taxProviderRepo\_
 
-• `Private` **taxProviderRepo\_**: typeof `TaxProviderRepository`
+• `Protected` `Readonly` **taxProviderRepo\_**: `Repository`<`TaxProvider`\>
 
 #### Defined in
 
-[services/tax-provider.ts:41](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L41)
+[medusa/src/services/tax-provider.ts:42](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L42)
 
 ___
 
 ### taxRateService\_
 
-• `Private` **taxRateService\_**: [`TaxRateService`](TaxRateService.md)
+• `Protected` `Readonly` **taxRateService\_**: [`TaxRateService`](TaxRateService.md)
 
 #### Defined in
 
-[services/tax-provider.ts:38](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L38)
+[medusa/src/services/tax-provider.ts:39](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L39)
 
 ___
 
 ### transactionManager\_
 
-• `Private` **transactionManager\_**: `EntityManager`
+• `Protected` **transactionManager\_**: `undefined` \| `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.transactionManager\_
 
 #### Defined in
 
-[services/tax-provider.ts:37](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L37)
+[medusa/src/interfaces/transaction-base-service.ts:6](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L6)
+
+## Accessors
+
+### activeManager\_
+
+• `Protected` `get` **activeManager_**(): `EntityManager`
+
+#### Returns
+
+`EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.activeManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:8](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L8)
 
 ## Methods
+
+### atomicPhase\_
+
+▸ `Protected` **atomicPhase_**<`TResult`, `TError`\>(`work`, `isolationOrErrorHandler?`, `maybeErrorHandlerOrDontFail?`): `Promise`<`TResult`\>
+
+Wraps some work within a transactional block. If the service already has
+a transaction manager attached this will be reused, otherwise a new
+transaction manager is created.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `TResult` |
+| `TError` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `work` | (`transactionManager`: `EntityManager`) => `Promise`<`TResult`\> | the transactional work to be done |
+| `isolationOrErrorHandler?` | `IsolationLevel` \| (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | the isolation level to be used for the work. |
+| `maybeErrorHandlerOrDontFail?` | (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | Potential error handler |
+
+#### Returns
+
+`Promise`<`TResult`\>
+
+the result of the transactional work
+
+#### Inherited from
+
+TransactionBaseService.atomicPhase\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:56](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L56)
+
+___
+
+### clearLineItemsTaxLines
+
+▸ **clearLineItemsTaxLines**(`itemIds`): `Promise`<`void`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `itemIds` | `string`[] |
+
+#### Returns
+
+`Promise`<`void`\>
+
+#### Defined in
+
+[medusa/src/services/tax-provider.ts:89](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L89)
+
+___
 
 ### clearTaxLines
 
@@ -126,7 +263,7 @@ ___
 
 #### Defined in
 
-[services/tax-provider.ts:98](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L98)
+[medusa/src/services/tax-provider.ts:97](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L97)
 
 ___
 
@@ -152,7 +289,7 @@ the newly created tax lines
 
 #### Defined in
 
-[services/tax-provider.ts:166](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L166)
+[medusa/src/services/tax-provider.ts:171](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L171)
 
 ___
 
@@ -177,38 +314,13 @@ the newly created tax lines
 
 #### Defined in
 
-[services/tax-provider.ts:116](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L116)
-
-___
-
-### getCacheEntry
-
-▸ `Private` **getCacheEntry**(`productId`, `regionId`): `Promise`<``null`` \| `TaxServiceRate`[]\>
-
-Gets the cache results for a set of ids
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `productId` | `string` | the product id to cache |
-| `regionId` | `string` | the region id to cache |
-
-#### Returns
-
-`Promise`<``null`` \| `TaxServiceRate`[]\>
-
-the cached result or null
-
-#### Defined in
-
-[services/tax-provider.ts:450](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L450)
+[medusa/src/services/tax-provider.ts:117](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L117)
 
 ___
 
 ### getCacheKey
 
-▸ `Private` **getCacheKey**(`productId`, `regionId`): `string`
+▸ `Private` **getCacheKey**(`id`, `regionId`): `string`
 
 The cache key to get cache hits by.
 
@@ -216,7 +328,7 @@ The cache key to get cache hits by.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `productId` | `string` | the product id to cache |
+| `id` | `string` | the entity id to cache |
 | `regionId` | `string` | the region id to cache |
 
 #### Returns
@@ -227,7 +339,7 @@ the cache key to use for the id set
 
 #### Defined in
 
-[services/tax-provider.ts:419](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L419)
+[medusa/src/services/tax-provider.ts:476](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L476)
 
 ___
 
@@ -243,7 +355,7 @@ calls.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `productId` | `string` | the product id to get rates for |
-| `region` | `Region` | the region to get configured rates for. |
+| `region` | `RegionDetails` | the region to get configured rates for. |
 
 #### Returns
 
@@ -253,13 +365,13 @@ the tax rates configured for the shipping option.
 
 #### Defined in
 
-[services/tax-provider.ts:374](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L374)
+[medusa/src/services/tax-provider.ts:428](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L428)
 
 ___
 
 ### getRegionRatesForShipping
 
-▸ **getRegionRatesForShipping**(`optionId`, `region`): `Promise`<`TaxServiceRate`[]\>
+▸ **getRegionRatesForShipping**(`optionId`, `regionDetails`): `Promise`<`TaxServiceRate`[]\>
 
 Gets the tax rates configured for a shipping option. The rates are cached
 between calls.
@@ -269,7 +381,7 @@ between calls.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `optionId` | `string` | the option id of the shipping method. |
-| `region` | `Region` | the region to get configured rates for. |
+| `regionDetails` | `RegionDetails` | the region to get configured rates for. |
 
 #### Returns
 
@@ -279,7 +391,7 @@ the tax rates configured for the shipping option.
 
 #### Defined in
 
-[services/tax-provider.ts:327](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L327)
+[medusa/src/services/tax-provider.ts:381](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L381)
 
 ___
 
@@ -306,7 +418,7 @@ the computed tax lines
 
 #### Defined in
 
-[services/tax-provider.ts:185](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L185)
+[medusa/src/services/tax-provider.ts:192](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L192)
 
 ___
 
@@ -335,7 +447,30 @@ the computed tax lines
 
 #### Defined in
 
-[services/tax-provider.ts:237](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L237)
+[medusa/src/services/tax-provider.ts:246](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L246)
+
+___
+
+### getTaxLinesMap
+
+▸ `Protected` **getTaxLinesMap**(`items`, `calculationContext`): `Promise`<`TaxLinesMaps`\>
+
+Return a map of tax lines for line items and shipping methods
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `items` | `LineItem`[] |
+| `calculationContext` | `TaxCalculationContext` |
+
+#### Returns
+
+`Promise`<`TaxLinesMaps`\>
+
+#### Defined in
+
+[medusa/src/services/tax-provider.ts:344](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L344)
 
 ___
 
@@ -349,7 +484,7 @@ ___
 
 #### Defined in
 
-[services/tax-provider.ts:70](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L70)
+[medusa/src/services/tax-provider.ts:57](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L57)
 
 ___
 
@@ -369,7 +504,7 @@ ___
 
 #### Defined in
 
-[services/tax-provider.ts:471](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L471)
+[medusa/src/services/tax-provider.ts:480](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L480)
 
 ___
 
@@ -393,50 +528,52 @@ the region specific tax provider
 
 #### Defined in
 
-[services/tax-provider.ts:80](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L80)
+[medusa/src/services/tax-provider.ts:67](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/tax-provider.ts#L67)
 
 ___
 
-### setCache
+### shouldRetryTransaction\_
 
-▸ `Private` **setCache**(`productId`, `regionId`, `value`): `Promise`<`void`\>
-
-Sets the cache results for a set of ids
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `productId` | `string` | the product id to cache |
-| `regionId` | `string` | the region id to cache |
-| `value` | `TaxServiceRate`[] | tax rates to cache |
-
-#### Returns
-
-`Promise`<`void`\>
-
-promise that resolves after the cache has been set
-
-#### Defined in
-
-[services/tax-provider.ts:430](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L430)
-
-___
-
-### withTransaction
-
-▸ **withTransaction**(`transactionManager`): [`TaxProviderService`](TaxProviderService.md)
+▸ `Protected` **shouldRetryTransaction_**(`err`): `boolean`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `transactionManager` | `EntityManager` |
+| `err` | `Record`<`string`, `unknown`\> \| { `code`: `string`  } |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+TransactionBaseService.shouldRetryTransaction\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:37](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L37)
+
+___
+
+### withTransaction
+
+▸ **withTransaction**(`transactionManager?`): [`TaxProviderService`](TaxProviderService.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `transactionManager?` | `EntityManager` |
 
 #### Returns
 
 [`TaxProviderService`](TaxProviderService.md)
 
+#### Inherited from
+
+TransactionBaseService.withTransaction
+
 #### Defined in
 
-[services/tax-provider.ts:57](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/tax-provider.ts#L57)
+[medusa/src/interfaces/transaction-base-service.ts:20](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L20)

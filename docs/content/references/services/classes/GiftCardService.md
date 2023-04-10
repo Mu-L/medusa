@@ -4,7 +4,7 @@ Provides layer to manipulate gift cards.
 
 ## Hierarchy
 
-- `"medusa-interfaces"`
+- `TransactionBaseService`
 
   ↳ **`GiftCardService`**
 
@@ -18,17 +18,127 @@ Provides layer to manipulate gift cards.
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
+| `__namedParameters` | `InjectedDependencies` |
 
 #### Overrides
 
-BaseService.constructor
+TransactionBaseService.constructor
 
 #### Defined in
 
-[services/gift-card.js:15](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L15)
+[medusa/src/services/gift-card.ts:39](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L39)
 
 ## Properties
+
+### \_\_configModule\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_configModule\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_configModule\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:14](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L14)
+
+___
+
+### \_\_container\_\_
+
+• `Protected` `Readonly` **\_\_container\_\_**: `any`
+
+#### Inherited from
+
+TransactionBaseService.\_\_container\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:13](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L13)
+
+___
+
+### \_\_moduleDeclaration\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_moduleDeclaration\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_moduleDeclaration\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:15](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L15)
+
+___
+
+### eventBus\_
+
+• `Protected` `Readonly` **eventBus\_**: [`EventBusService`](EventBusService.md)
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:33](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L33)
+
+___
+
+### giftCardRepository\_
+
+• `Protected` `Readonly` **giftCardRepository\_**: `Repository`<`GiftCard`\> & { `listGiftCardsAndCount`: (`query`: `ExtendedFindConfig`<`GiftCard`\>, `q?`: `string`) => `Promise`<[`GiftCard`[], `number`]\>  }
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:29](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L29)
+
+___
+
+### giftCardTransactionRepo\_
+
+• `Protected` `Readonly` **giftCardTransactionRepo\_**: `Repository`<`GiftCardTransaction`\>
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:31](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L31)
+
+___
+
+### manager\_
+
+• `Protected` **manager\_**: `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.manager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:5](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L5)
+
+___
+
+### regionService\_
+
+• `Protected` `Readonly` **regionService\_**: [`RegionService`](RegionService.md)
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:32](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L32)
+
+___
+
+### transactionManager\_
+
+• `Protected` **transactionManager\_**: `undefined` \| `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.transactionManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:6](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L6)
+
+___
 
 ### Events
 
@@ -42,9 +152,66 @@ BaseService.constructor
 
 #### Defined in
 
-[services/gift-card.js:11](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L11)
+[medusa/src/services/gift-card.ts:35](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L35)
+
+## Accessors
+
+### activeManager\_
+
+• `Protected` `get` **activeManager_**(): `EntityManager`
+
+#### Returns
+
+`EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.activeManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:8](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L8)
 
 ## Methods
+
+### atomicPhase\_
+
+▸ `Protected` **atomicPhase_**<`TResult`, `TError`\>(`work`, `isolationOrErrorHandler?`, `maybeErrorHandlerOrDontFail?`): `Promise`<`TResult`\>
+
+Wraps some work within a transactional block. If the service already has
+a transaction manager attached this will be reused, otherwise a new
+transaction manager is created.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `TResult` |
+| `TError` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `work` | (`transactionManager`: `EntityManager`) => `Promise`<`TResult`\> | the transactional work to be done |
+| `isolationOrErrorHandler?` | `IsolationLevel` \| (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | the isolation level to be used for the work. |
+| `maybeErrorHandlerOrDontFail?` | (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | Potential error handler |
+
+#### Returns
+
+`Promise`<`TResult`\>
+
+the result of the transactional work
+
+#### Inherited from
+
+TransactionBaseService.atomicPhase\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:56](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L56)
+
+___
 
 ### create
 
@@ -56,7 +223,7 @@ Creates a gift card with provided data given that the data is validated.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `giftCard` | `GiftCard` | the gift card data to create |
+| `giftCard` | `CreateGiftCardInput` | the gift card data to create |
 
 #### Returns
 
@@ -66,33 +233,33 @@ the result of the create operation
 
 #### Defined in
 
-[services/gift-card.js:134](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L134)
+[medusa/src/services/gift-card.ts:122](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L122)
 
 ___
 
 ### createTransaction
 
-▸ **createTransaction**(`data`): `Promise`<`any`\>
+▸ **createTransaction**(`data`): `Promise`<`string`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `any` |
+| `data` | `CreateGiftCardTransactionInput` |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`string`\>
 
 #### Defined in
 
-[services/gift-card.js:120](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L120)
+[medusa/src/services/gift-card.ts:106](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L106)
 
 ___
 
 ### delete
 
-▸ **delete**(`giftCardId`): `Promise`<`any`\>
+▸ **delete**(`giftCardId`): `Promise`<`void` \| `GiftCard`\>
 
 Deletes a gift card idempotently
 
@@ -104,54 +271,59 @@ Deletes a gift card idempotently
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`void` \| `GiftCard`\>
 
 the result of the delete operation
 
 #### Defined in
 
-[services/gift-card.js:288](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L288)
-
-___
-
-### generateCode\_
-
-▸ **generateCode_**(): `string`
-
-Generates a 16 character gift card code
-
-#### Returns
-
-`string`
-
-the generated gift card code
-
-#### Defined in
-
-[services/gift-card.js:62](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L62)
+[medusa/src/services/gift-card.ts:295](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L295)
 
 ___
 
 ### list
 
-▸ **list**(`selector?`, `config?`): `Promise`<`any`\>
+▸ **list**(`selector?`, `config?`): `Promise`<`GiftCard`[]\>
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | `any` | the query object for find |
-| `config` | `any` | the configuration used to find the objects. contains relations, skip, and take. |
+| `selector` | `QuerySelector`<`GiftCard`\> | the query object for find |
+| `config` | `FindConfig`<`GiftCard`\> | the configuration used to find the objects. contains relations, skip, and take. |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`GiftCard`[]\>
 
 the result of the find operation
 
 #### Defined in
 
-[services/gift-card.js:78](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L78)
+[medusa/src/services/gift-card.ts:98](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L98)
+
+___
+
+### listAndCount
+
+▸ **listAndCount**(`selector?`, `config?`): `Promise`<[`GiftCard`[], `number`]\>
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `selector` | `QuerySelector`<`GiftCard`\> | the query object for find |
+| `config` | `FindConfig`<`GiftCard`\> | the configuration used to find the objects. contains relations, skip, and take. |
+
+#### Returns
+
+`Promise`<[`GiftCard`[], `number`]\>
+
+the result of the find operation
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:74](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L74)
 
 ___
 
@@ -166,7 +338,7 @@ Gets a gift card by id.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `giftCardId` | `string` | id of gift card to retrieve |
-| `config` | `any` | optional values to include with gift card query |
+| `config` | `FindConfig`<`GiftCard`\> | optional values to include with gift card query |
 
 #### Returns
 
@@ -176,34 +348,79 @@ the gift card
 
 #### Defined in
 
-[services/gift-card.js:175](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L175)
+[medusa/src/services/gift-card.ts:215](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L215)
 
 ___
 
 ### retrieveByCode
 
-▸ **retrieveByCode**(`code`, `config?`): `Promise`<`any`\>
+▸ **retrieveByCode**(`code`, `config?`): `Promise`<`GiftCard`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `code` | `any` |
-| `config` | `Object` |
+| `code` | `string` |
+| `config` | `FindConfig`<`GiftCard`\> |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`GiftCard`\>
 
 #### Defined in
 
-[services/gift-card.js:209](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L209)
+[medusa/src/services/gift-card.ts:229](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L229)
+
+___
+
+### retrieve\_
+
+▸ `Protected` **retrieve_**(`selector`, `config?`): `Promise`<`GiftCard`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `selector` | `Selector`<`GiftCard`\> |
+| `config` | `FindConfig`<`GiftCard`\> |
+
+#### Returns
+
+`Promise`<`GiftCard`\>
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:182](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L182)
+
+___
+
+### shouldRetryTransaction\_
+
+▸ `Protected` **shouldRetryTransaction_**(`err`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `err` | `Record`<`string`, `unknown`\> \| { `code`: `string`  } |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+TransactionBaseService.shouldRetryTransaction\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:37](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L37)
 
 ___
 
 ### update
 
-▸ **update**(`giftCardId`, `update`): `Promise`<`any`\>
+▸ **update**(`giftCardId`, `update`): `Promise`<`GiftCard`\>
 
 Updates a giftCard.
 
@@ -212,34 +429,82 @@ Updates a giftCard.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `giftCardId` | `string` | giftCard id of giftCard to update |
-| `update` | `GiftCard` | the data to update the giftCard with |
+| `update` | `UpdateGiftCardInput` | the data to update the giftCard with |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`GiftCard`\>
 
 the result of the update operation
 
 #### Defined in
 
-[services/gift-card.js:247](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L247)
+[medusa/src/services/gift-card.ts:249](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L249)
 
 ___
 
 ### withTransaction
 
-▸ **withTransaction**(`transactionManager`): [`GiftCardService`](GiftCardService.md)
+▸ **withTransaction**(`transactionManager?`): [`GiftCardService`](GiftCardService.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `transactionManager` | `any` |
+| `transactionManager?` | `EntityManager` |
 
 #### Returns
 
 [`GiftCardService`](GiftCardService.md)
 
+#### Inherited from
+
+TransactionBaseService.withTransaction
+
 #### Defined in
 
-[services/gift-card.js:40](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/gift-card.js#L40)
+[medusa/src/interfaces/transaction-base-service.ts:20](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L20)
+
+___
+
+### generateCode
+
+▸ `Static` **generateCode**(): `string`
+
+Generates a 16 character gift card code
+
+#### Returns
+
+`string`
+
+the generated gift card code
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:58](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L58)
+
+___
+
+### resolveTaxRate
+
+▸ `Static` `Protected` **resolveTaxRate**(`giftCardTaxRate`, `region`): ``null`` \| `number`
+
+The tax_rate of the giftcard can depend on whether regions tax gift cards, an input
+provided by the user or the tax rate. Based on these conditions, tax_rate changes.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `giftCardTaxRate` | ``null`` \| `number` |
+| `region` | `Region` |
+
+#### Returns
+
+``null`` \| `number`
+
+the tax rate for the gift card
+
+#### Defined in
+
+[medusa/src/services/gift-card.ts:161](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/gift-card.ts#L161)

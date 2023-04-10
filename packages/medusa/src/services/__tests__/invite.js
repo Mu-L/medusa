@@ -14,7 +14,7 @@ describe("InviteService", () => {
     })
 
     const inviteService = new InviteService({
-      manager: { getCustomRepository: jest.fn(() => inviteRepo) },
+      manager: { withRepository: jest.fn(() => inviteRepo) },
       userService: {},
       userRepository: {},
       inviteRepository: inviteRepo,
@@ -138,7 +138,6 @@ describe("InviteService", () => {
     it("fails to accept an with an invalid token", async () => {
       expect.assertions(2)
       await inviteService.accept("totally.valid.token", {}).catch((err) => {
-        console.log(err)
         expect(err.message).toEqual("Token is not valid")
         expect(err.type).toEqual("invalid_data")
       })
@@ -193,7 +192,7 @@ describe("InviteService", () => {
     const inviteRepo = MockRepository({
       findOne: (q) => {
         return Promise.resolve({
-          id: q.id,
+          id: q.where.id,
           role: "admin",
           user_email: "test@test.com",
         })
@@ -201,7 +200,7 @@ describe("InviteService", () => {
     })
 
     const inviteService = new InviteService({
-      manager: { getCustomRepository: jest.fn(() => inviteRepo) },
+      manager: { withRepository: jest.fn(() => inviteRepo) },
       userService: {},
       userRepository: {},
       inviteRepository: inviteRepo,

@@ -1,8 +1,5 @@
-import { IdMap } from "medusa-test-utils"
-import { MedusaError } from "medusa-core-utils"
-
 export const LineItemAdjustmentServiceMock = {
-  withTransaction: function() {
+  withTransaction: function () {
     return this
   },
   create: jest.fn().mockImplementation((data) => {

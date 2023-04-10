@@ -3,158 +3,280 @@
 Can keep track of multiple subscribers to different events and run the
 subscribers when events happen. Events will run asynchronously.
 
+## Hierarchy
+
+- `TransactionBaseService`
+
+  ↳ **`EventBusService`**
+
+## Implements
+
+- `IEventBusService`
+
 ## Constructors
 
 ### constructor
 
-• **new EventBusService**(`__namedParameters`, `config`, `singleton?`)
+• **new EventBusService**(`__namedParameters`, `config`, `isSingleton?`)
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `__namedParameters` | `Object` | `undefined` |
+| `__namedParameters` | `InjectedDependencies` | `undefined` |
 | `config` | `any` | `undefined` |
-| `singleton` | `boolean` | `true` |
+| `isSingleton` | `boolean` | `true` |
+
+#### Overrides
+
+TransactionBaseService.constructor
 
 #### Defined in
 
-[services/event-bus.js:10](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L10)
+[medusa/src/services/event-bus.ts:32](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L32)
 
 ## Properties
 
-### config\_
+### \_\_configModule\_\_
 
-• **config\_**: `any`
+• `Protected` `Optional` `Readonly` **\_\_configModule\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_configModule\_\_
 
 #### Defined in
 
-[services/event-bus.js:31](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L31)
+[medusa/src/interfaces/transaction-base-service.ts:14](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L14)
 
 ___
 
-### enRun\_
+### \_\_container\_\_
 
-• **enRun\_**: `undefined` \| `boolean`
+• `Protected` `Readonly` **\_\_container\_\_**: `any`
+
+#### Inherited from
+
+TransactionBaseService.\_\_container\_\_
 
 #### Defined in
 
-[services/event-bus.js:182](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L182)
+[medusa/src/interfaces/transaction-base-service.ts:13](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L13)
+
+___
+
+### \_\_moduleDeclaration\_\_
+
+• `Protected` `Optional` `Readonly` **\_\_moduleDeclaration\_\_**: `Record`<`string`, `unknown`\>
+
+#### Inherited from
+
+TransactionBaseService.\_\_moduleDeclaration\_\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:15](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L15)
+
+___
+
+### config\_
+
+• `Protected` `Readonly` **config\_**: `ConfigModule`
+
+#### Defined in
+
+[medusa/src/services/event-bus.ts:24](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L24)
 
 ___
 
 ### enqueue\_
 
-• **enqueue\_**: `undefined` \| `Promise`<`void`\>
+• `Protected` **enqueue\_**: `Promise`<`void`\>
 
 #### Defined in
 
-[services/event-bus.js:183](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L183)
+[medusa/src/services/event-bus.ts:30](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L30)
 
 ___
 
-### redisClient\_
+### eventBusModuleService\_
 
-• **redisClient\_**: `any`
+• `Protected` `Readonly` **eventBusModuleService\_**: `AbstractEventBusModuleService`
 
 #### Defined in
 
-[services/event-bus.js:51](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L51)
+[medusa/src/services/event-bus.ts:27](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L27)
 
 ___
 
-### redisSubscriber\_
+### manager\_
 
-• **redisSubscriber\_**: `any`
+• `Protected` **manager\_**: `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.manager\_
 
 #### Defined in
 
-[services/event-bus.js:52](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L52)
+[medusa/src/interfaces/transaction-base-service.ts:5](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L5)
 
 ___
 
-### stagedJobRepository\_
+### shouldEnqueuerRun
 
-• **stagedJobRepository\_**: `any`
+• `Protected` **shouldEnqueuerRun**: `boolean`
 
 #### Defined in
 
-[services/event-bus.js:39](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L39)
+[medusa/src/services/event-bus.ts:29](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L29)
+
+___
+
+### stagedJobService\_
+
+• `Protected` `Readonly` **stagedJobService\_**: [`StagedJobService`](StagedJobService.md)
+
+#### Defined in
+
+[medusa/src/services/event-bus.ts:25](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L25)
+
+___
+
+### transactionManager\_
+
+• `Protected` **transactionManager\_**: `undefined` \| `EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.transactionManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:6](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L6)
+
+## Accessors
+
+### activeManager\_
+
+• `Protected` `get` **activeManager_**(): `EntityManager`
+
+#### Returns
+
+`EntityManager`
+
+#### Inherited from
+
+TransactionBaseService.activeManager\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:8](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L8)
 
 ## Methods
 
-### createCronJob
+### atomicPhase\_
 
-▸ **createCronJob**(`eventName`, `data`, `cron`, `handler`): `void`
+▸ `Protected` **atomicPhase_**<`TResult`, `TError`\>(`work`, `isolationOrErrorHandler?`, `maybeErrorHandlerOrDontFail?`): `Promise`<`TResult`\>
 
-Registers a cron job.
+Wraps some work within a transactional block. If the service already has
+a transaction manager attached this will be reused, otherwise a new
+transaction manager is created.
 
-#### Parameters
+#### Type parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `eventName` | `string` | the name of the event |
-| `data` | `any` | the data to be sent with the event |
-| `cron` | `string` | the cron pattern |
-| `handler` | `Function` | the handler to call on each cron job |
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[services/event-bus.js:280](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L280)
-
-___
-
-### cronWorker\_
-
-▸ **cronWorker_**(`job`): `Promise`<`any`\>
-
-Handles incoming jobs.
+| Name |
+| :------ |
+| `TResult` |
+| `TError` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `job` | `any` | The job object |
+| `work` | (`transactionManager`: `EntityManager`) => `Promise`<`TResult`\> | the transactional work to be done |
+| `isolationOrErrorHandler?` | `IsolationLevel` \| (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | the isolation level to be used for the work. |
+| `maybeErrorHandlerOrDontFail?` | (`error`: `TError`) => `Promise`<`void` \| `TResult`\> | Potential error handler |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`TResult`\>
 
-resolves to the results of the subscriber calls.
+the result of the transactional work
+
+#### Inherited from
+
+TransactionBaseService.atomicPhase\_
 
 #### Defined in
 
-[services/event-bus.js:255](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L255)
+[medusa/src/interfaces/transaction-base-service.ts:56](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L56)
 
 ___
 
 ### emit
 
-▸ **emit**(`eventName`, `data`, `options?`): `BullJob`
+▸ **emit**<`T`\>(`data`): `Promise`<`void` \| `StagedJob`[]\>
 
 Calls all subscribers when an event occurs.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `data` | `EmitData`<`T`\>[] | The data to use to process the events |
+
+#### Returns
+
+`Promise`<`void` \| `StagedJob`[]\>
+
+the jobs from our queue
+
+#### Implementation of
+
+EventBusTypes.IEventBusService.emit
+
+#### Defined in
+
+[medusa/src/services/event-bus.ts:112](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L112)
+
+▸ **emit**<`T`\>(`eventName`, `data`, `options?`): `Promise`<`void` \| `StagedJob`\>
+
+Calls all subscribers when an event occurs.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `eventName` | `string` | the name of the event to be process. |
-| `data` | `any` | the data to send to the subscriber. |
-| `options` | `any` | options to add the job with |
+| `data` | `T` | the data to send to the subscriber. |
+| `options?` | `Record`<`string`, `unknown`\> | options to add the job with |
 
 #### Returns
 
-`BullJob`
+`Promise`<`void` \| `StagedJob`\>
 
-- the job from our queue
+the job from our queue
+
+#### Implementation of
+
+EventBusTypes.IEventBusService.emit
 
 #### Defined in
 
-[services/event-bus.js:154](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L154)
+[medusa/src/services/event-bus.ts:121](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L121)
 
 ___
 
@@ -168,22 +290,37 @@ ___
 
 #### Defined in
 
-[services/event-bus.js:191](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L191)
+[medusa/src/services/event-bus.ts:184](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L184)
 
 ___
 
-### registerCronHandler\_
+### shouldRetryTransaction\_
 
-▸ **registerCronHandler_**(`event`, `subscriber`): `void`
-
-Adds a function to a list of event subscribers.
+▸ `Protected` **shouldRetryTransaction_**(`err`): `boolean`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `event` | `string` | the event that the subscriber will listen for. |
-| `subscriber` | `func` | the function to be called when a certain event happens. Subscribers must return a Promise. |
+| Name | Type |
+| :------ | :------ |
+| `err` | `Record`<`string`, `unknown`\> \| { `code`: `string`  } |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+TransactionBaseService.shouldRetryTransaction\_
+
+#### Defined in
+
+[medusa/src/interfaces/transaction-base-service.ts:37](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/interfaces/transaction-base-service.ts#L37)
+
+___
+
+### startEnqueuer
+
+▸ **startEnqueuer**(): `void`
 
 #### Returns
 
@@ -191,41 +328,7 @@ Adds a function to a list of event subscribers.
 
 #### Defined in
 
-[services/event-bus.js:135](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L135)
-
-___
-
-### sleep
-
-▸ **sleep**(`ms`): `Promise`<`any`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `ms` | `any` |
-
-#### Returns
-
-`Promise`<`any`\>
-
-#### Defined in
-
-[services/event-bus.js:175](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L175)
-
-___
-
-### startEnqueuer
-
-▸ **startEnqueuer**(): `Promise`<`void`\>
-
-#### Returns
-
-`Promise`<`void`\>
-
-#### Defined in
-
-[services/event-bus.js:181](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L181)
+[medusa/src/services/event-bus.ts:174](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L174)
 
 ___
 
@@ -239,13 +342,13 @@ ___
 
 #### Defined in
 
-[services/event-bus.js:186](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L186)
+[medusa/src/services/event-bus.ts:179](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L179)
 
 ___
 
 ### subscribe
 
-▸ **subscribe**(`event`, `subscriber`): `void`
+▸ **subscribe**(`event`, `subscriber`, `context?`): [`EventBusService`](EventBusService.md)
 
 Adds a function to a list of event subscribers.
 
@@ -253,80 +356,78 @@ Adds a function to a list of event subscribers.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `event` | `string` | the event that the subscriber will listen for. |
-| `subscriber` | `func` | the function to be called when a certain event happens. Subscribers must return a Promise. |
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[services/event-bus.js:98](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L98)
-
-___
-
-### unsubscribe
-
-▸ **unsubscribe**(`event`, `subscriber`): `void`
-
-Adds a function to a list of event subscribers.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `event` | `string` | the event that the subscriber will listen for. |
-| `subscriber` | `func` | the function to be called when a certain event happens. Subscribers must return a Promise. |
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[services/event-bus.js:116](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L116)
-
-___
-
-### withTransaction
-
-▸ **withTransaction**(`transactionManager`): [`EventBusService`](EventBusService.md)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `transactionManager` | `any` |
+| `event` | `string` \| `symbol` | the event that the subscriber will listen for. |
+| `subscriber` | `Subscriber`<`unknown`\> | the function to be called when a certain event happens. Subscribers must return a Promise. |
+| `context?` | `SubscriberContext` | subscriber context |
 
 #### Returns
 
 [`EventBusService`](EventBusService.md)
 
+this
+
+#### Implementation of
+
+EventBusTypes.IEventBusService.subscribe
+
 #### Defined in
 
-[services/event-bus.js:69](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L69)
+[medusa/src/services/event-bus.ts:78](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L78)
 
 ___
 
-### worker\_
+### unsubscribe
 
-▸ **worker_**(`job`): `Promise`<`any`\>
+▸ **unsubscribe**(`event`, `subscriber`, `context`): [`EventBusService`](EventBusService.md)
 
-Handles incoming jobs.
+Removes function from the list of event subscribers.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `job` | `any` | The job object |
+| `event` | `string` \| `symbol` | the event of the subcriber. |
+| `subscriber` | `Subscriber`<`unknown`\> | the function to be removed |
+| `context` | `SubscriberContext` | subscriber context |
 
 #### Returns
 
-`Promise`<`any`\>
+[`EventBusService`](EventBusService.md)
 
-resolves to the results of the subscriber calls.
+this
+
+#### Implementation of
+
+EventBusTypes.IEventBusService.unsubscribe
 
 #### Defined in
 
-[services/event-bus.js:226](https://github.com/medusajs/medusa/blob/2d3e404f/packages/medusa/src/services/event-bus.js#L226)
+[medusa/src/services/event-bus.ts:98](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L98)
+
+___
+
+### withTransaction
+
+▸ **withTransaction**(`transactionManager?`): [`EventBusService`](EventBusService.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `transactionManager?` | `EntityManager` |
+
+#### Returns
+
+[`EventBusService`](EventBusService.md)
+
+#### Implementation of
+
+EventBusTypes.IEventBusService.withTransaction
+
+#### Overrides
+
+TransactionBaseService.withTransaction
+
+#### Defined in
+
+[medusa/src/services/event-bus.ts:49](https://github.com/medusajs/medusa/blob/66c59d54f/packages/medusa/src/services/event-bus.ts#L49)

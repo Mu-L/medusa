@@ -8,13 +8,16 @@ const {
   ShippingProfile,
   ProductVariant,
   Image,
+  ShippingProfileType,
 } = require("@medusajs/medusa")
 
-module.exports = async (connection, data = {}) => {
-  const manager = connection.manager
+module.exports = async (dataSource, data = {}) => {
+  const manager = dataSource.manager
 
   const defaultProfile = await manager.findOne(ShippingProfile, {
-    type: "default",
+    where: {
+      type: ShippingProfileType.DEFAULT,
+    },
   })
 
   const coll = await manager.create(ProductCollection, {
@@ -50,14 +53,14 @@ module.exports = async (connection, data = {}) => {
 
   const tag3 = await manager.create(ProductTag, {
     id: "tag3",
-    value: "123",
+    value: "1235",
   })
 
   await manager.save(tag3)
 
   const tag4 = await manager.create(ProductTag, {
     id: "tag4",
-    value: "123",
+    value: "1234",
   })
 
   await manager.save(tag4)

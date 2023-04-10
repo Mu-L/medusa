@@ -1,5 +1,5 @@
 import { IdMap } from "medusa-test-utils"
-import { defaultStoreProductsRelations } from ".."
+import { defaultStoreProductsFields, defaultStoreProductsRelations } from ".."
 import { request } from "../../../../../helpers/test-request"
 import { ProductServiceMock } from "../../../../../services/__mocks__/product"
 
@@ -22,11 +22,8 @@ describe("Get product by id", () => {
       expect(ProductServiceMock.retrieve).toHaveBeenCalledWith(
         IdMap.getId("product1"),
         {
+          select: defaultStoreProductsFields,
           relations: defaultStoreProductsRelations,
-          cart_id: undefined,
-          currency_code: undefined,
-          region_id: undefined,
-          include_discount_prices: true,
         }
       )
     })
@@ -58,11 +55,8 @@ describe("Get product by id", () => {
       expect(ProductServiceMock.retrieve).toHaveBeenCalledWith(
         IdMap.getId("variantsWithPrices"),
         {
+          select: defaultStoreProductsFields,
           relations: defaultStoreProductsRelations,
-          cart_id: undefined,
-          currency_code: undefined,
-          region_id: undefined,
-          include_discount_prices: true,
         }
       )
     })
