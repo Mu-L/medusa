@@ -1,5 +1,9 @@
 export const region = [
   {
+    "title": "Implement Express Checkout with Medusa",
+    "path": "/storefront-development/guides/express-checkout"
+  },
+  {
     "title": "Region Context in Storefront",
     "path": "/storefront-development/regions/context"
   },
@@ -18,6 +22,18 @@ export const region = [
   {
     "title": "createCartWorkflow",
     "path": "/references/medusa-workflows/createCartWorkflow"
+  },
+  {
+    "title": "validateShippingOptionPricesStep",
+    "path": "/references/medusa-workflows/steps/validateShippingOptionPricesStep"
+  },
+  {
+    "title": "createShippingOptionsWorkflow",
+    "path": "/references/medusa-workflows/createShippingOptionsWorkflow"
+  },
+  {
+    "title": "updateShippingOptionsWorkflow",
+    "path": "/references/medusa-workflows/updateShippingOptionsWorkflow"
   },
   {
     "title": "addOrderLineItemsWorkflow",

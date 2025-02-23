@@ -41,6 +41,7 @@ medusaIntegrationTestRunner({
     let publishableKey
     let storeHeadersWithCustomer
     let customer
+    let shippingProfile
 
     const createProducts = async (data) => {
       const response = await api.post(
@@ -135,6 +136,14 @@ medusaIntegrationTestRunner({
           adminHeaders
         )
       ).data.region
+
+      shippingProfile = (
+        await api.post(
+          `/admin/shipping-profiles`,
+          { name: "default", type: "default" },
+          adminHeaders
+        )
+      ).data.shipping_profile
     })
 
     describe("Get products based on publishable key", () => {
@@ -145,7 +154,11 @@ medusaIntegrationTestRunner({
         product1 = (
           await api.post(
             "/admin/products",
-            getProductFixture({ title: "test1", status: "published" }),
+            getProductFixture({
+              title: "test1",
+              status: "published",
+              shipping_profile_id: shippingProfile.id,
+            }),
             adminHeaders
           )
         ).data.product
@@ -153,7 +166,11 @@ medusaIntegrationTestRunner({
         product2 = (
           await api.post(
             "/admin/products",
-            getProductFixture({ title: "test2", status: "published" }),
+            getProductFixture({
+              title: "test2",
+              status: "published",
+              shipping_profile_id: shippingProfile.id,
+            }),
             adminHeaders
           )
         ).data.product
@@ -161,7 +178,11 @@ medusaIntegrationTestRunner({
         product3 = (
           await api.post(
             "/admin/products",
-            getProductFixture({ title: "test3", status: "published" }),
+            getProductFixture({
+              title: "test3",
+              status: "published",
+              shipping_profile_id: shippingProfile.id,
+            }),
             adminHeaders
           )
         ).data.product
@@ -500,6 +521,7 @@ medusaIntegrationTestRunner({
           title: "test product 1",
           collection_id: collection.id,
           status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
           options: [
             { title: "size", values: ["large", "small"] },
             { title: "color", values: ["green"] },
@@ -538,6 +560,7 @@ medusaIntegrationTestRunner({
         ;[product2, [variant2]] = await createProducts({
           title: "test product 2 uniquely",
           status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
           options: [
             { title: "size", values: ["large", "small"] },
             { title: "material", values: ["cotton", "polyester"] },
@@ -557,6 +580,7 @@ medusaIntegrationTestRunner({
         ;[product3, [variant3]] = await createProducts({
           title: "product not in price list",
           status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
           options: [{ title: "size", values: ["large", "small"] }],
           variants: [
             { title: "test variant 3", prices: [], options: { size: "large" } },
@@ -565,6 +589,7 @@ medusaIntegrationTestRunner({
         ;[product4, [variant4]] = await createProducts({
           title: "draft product",
           status: ProductStatus.DRAFT,
+          shipping_profile_id: shippingProfile.id,
           options: [{ title: "size", values: ["large", "small"] }],
           variants: [
             { title: "test variant 4", prices: [], options: { size: "large" } },
@@ -834,6 +859,34 @@ medusaIntegrationTestRunner({
         expect(response.data.count).toEqual(1)
         expect(response.data.products).toEqual([
           expect.objectContaining({ id: product.id }),
+        ])
+      })
+
+      it("returns a list of products with one of the given handles", async () => {
+        const response = await api.get(
+          `/store/products?handle[]=${product.handle}&handle[]=${product2.handle}`,
+          storeHeaders
+        )
+
+        expect(response.status).toEqual(200)
+        expect(response.data.count).toEqual(2)
+        expect(response.data.products).toEqual([
+          expect.objectContaining({ id: product.id }),
+          expect.objectContaining({ id: product2.id }),
+        ])
+      })
+
+      it("returns a list of products with one of the given titles", async () => {
+        const response = await api.get(
+          `/store/products?title[]=${product.title}&title[]=${product2.title}`,
+          storeHeaders
+        )
+
+        expect(response.status).toEqual(200)
+        expect(response.data.count).toEqual(2)
+        expect(response.data.products).toEqual([
+          expect.objectContaining({ id: product.id }),
+          expect.objectContaining({ id: product2.id }),
         ])
       })
 
@@ -1727,6 +1780,7 @@ medusaIntegrationTestRunner({
         ;[product, [variant]] = await createProducts({
           title: "test product 1",
           status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
           options: [{ title: "size", values: ["large"] }],
           variants: [
             {
@@ -2206,6 +2260,7 @@ medusaIntegrationTestRunner({
             getProductFixture({
               title: "test1",
               status: "published",
+              shipping_profile_id: shippingProfile.id,
               variants: [
                 {
                   title: "Test taxes",
@@ -2239,6 +2294,7 @@ medusaIntegrationTestRunner({
             getProductFixture({
               title: "test2",
               status: "published",
+              shipping_profile_id: shippingProfile.id,
             }),
             adminHeaders
           )

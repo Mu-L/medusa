@@ -38,6 +38,7 @@ export const cartFieldsForRefreshSteps = [
 ]
 
 export const completeCartFields = [
+  "metadata",
   "id",
   "currency_code",
   "email",
@@ -98,6 +99,7 @@ export const completeCartFields = [
   "payment_collection.payment_sessions.*",
   "items.variant.id",
   "items.variant.product.id",
+  "items.variant.product.shipping_profile.id",
   "items.variant.manage_inventory",
   "items.variant.allow_backorder",
   "items.variant.inventory_items.inventory_item_id",
@@ -145,6 +147,7 @@ export const productVariantsFields = [
   "product.collection.title",
   "product.handle",
   "product.discountable",
+  "product.shipping_profile.id",
   "calculated_price.*",
   "inventory_items.inventory_item_id",
   "inventory_items.required_quantity",

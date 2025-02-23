@@ -116,12 +116,36 @@ export const step = [
     "path": "/references/medusa-workflows/steps/updateLineItemsStep"
   },
   {
+    "title": "updateShippingMethodsStep",
+    "path": "/references/medusa-workflows/steps/updateShippingMethodsStep"
+  },
+  {
+    "title": "validateAndReturnShippingMethodsDataStep",
+    "path": "/references/medusa-workflows/steps/validateAndReturnShippingMethodsDataStep"
+  },
+  {
     "title": "validateCartPaymentsStep",
     "path": "/references/medusa-workflows/steps/validateCartPaymentsStep"
   },
   {
+    "title": "validateCartShippingOptionsPriceStep",
+    "path": "/references/medusa-workflows/steps/validateCartShippingOptionsPriceStep"
+  },
+  {
     "title": "validateCartShippingOptionsStep",
     "path": "/references/medusa-workflows/steps/validateCartShippingOptionsStep"
+  },
+  {
+    "title": "validateCartStep",
+    "path": "/references/medusa-workflows/steps/validateCartStep"
+  },
+  {
+    "title": "validateLineItemPricesStep",
+    "path": "/references/medusa-workflows/steps/validateLineItemPricesStep"
+  },
+  {
+    "title": "validateShippingStep",
+    "path": "/references/medusa-workflows/steps/validateShippingStep"
   },
   {
     "title": "validateVariantPricesStep",
@@ -194,6 +218,10 @@ export const step = [
   {
     "title": "updateCustomersStep",
     "path": "/references/medusa-workflows/steps/updateCustomersStep"
+  },
+  {
+    "title": "validateCustomerAccountCreation",
+    "path": "/references/medusa-workflows/steps/validateCustomerAccountCreation"
   },
   {
     "title": "createCustomerGroupsStep",
@@ -288,6 +316,14 @@ export const step = [
     "path": "/references/medusa-workflows/steps/updateFulfillmentStep"
   },
   {
+    "title": "updateServiceZonesStep",
+    "path": "/references/medusa-workflows/steps/updateServiceZonesStep"
+  },
+  {
+    "title": "updateShippingOptionRulesStep",
+    "path": "/references/medusa-workflows/steps/updateShippingOptionRulesStep"
+  },
+  {
     "title": "updateShippingProfilesStep",
     "path": "/references/medusa-workflows/steps/updateShippingProfilesStep"
   },
@@ -298,6 +334,10 @@ export const step = [
   {
     "title": "validateShipmentStep",
     "path": "/references/medusa-workflows/steps/validateShipmentStep"
+  },
+  {
+    "title": "validateShippingOptionPricesStep",
+    "path": "/references/medusa-workflows/steps/validateShippingOptionPricesStep"
   },
   {
     "title": "validateFulfillmentDeliverabilityStep",
@@ -362,6 +402,14 @@ export const step = [
   {
     "title": "updateLineItemsStepWithSelector",
     "path": "/references/medusa-workflows/steps/updateLineItemsStepWithSelector"
+  },
+  {
+    "title": "notifyOnFailureStep",
+    "path": "/references/medusa-workflows/steps/notifyOnFailureStep"
+  },
+  {
+    "title": "sendNotificationsStep",
+    "path": "/references/medusa-workflows/steps/sendNotificationsStep"
   },
   {
     "title": "addOrderTransactionStep",
@@ -490,10 +538,6 @@ export const step = [
   {
     "title": "updateOrderChangesStep",
     "path": "/references/medusa-workflows/steps/updateOrderChangesStep"
-  },
-  {
-    "title": "updateOrderExchangesStep",
-    "path": "/references/medusa-workflows/steps/updateOrderExchangesStep"
   },
   {
     "title": "updateOrderShippingMethodsStep",
@@ -812,6 +856,10 @@ export const step = [
     "path": "/references/medusa-workflows/validateRefundStep"
   },
   {
+    "title": "createPaymentAccountHolderStep",
+    "path": "/references/medusa-workflows/steps/createPaymentAccountHolderStep"
+  },
+  {
     "title": "createPaymentSessionStep",
     "path": "/references/medusa-workflows/steps/createPaymentSessionStep"
   },
@@ -822,6 +870,10 @@ export const step = [
   {
     "title": "deletePaymentSessionsStep",
     "path": "/references/medusa-workflows/steps/deletePaymentSessionsStep"
+  },
+  {
+    "title": "deleteRefundReasonsStep",
+    "path": "/references/medusa-workflows/steps/deleteRefundReasonsStep"
   },
   {
     "title": "updatePaymentCollectionStep",
@@ -890,6 +942,10 @@ export const step = [
   {
     "title": "updatePriceSetsStep",
     "path": "/references/medusa-workflows/steps/updatePriceSetsStep"
+  },
+  {
+    "title": "batchLinkProductsToCategoryStep",
+    "path": "/references/medusa-workflows/steps/batchLinkProductsToCategoryStep"
   },
   {
     "title": "batchLinkProductsToCollectionStep",
@@ -1052,12 +1108,20 @@ export const step = [
     "path": "/references/medusa-workflows/steps/updatePromotionsStep"
   },
   {
+    "title": "updatePromotionsValidationStep",
+    "path": "/references/medusa-workflows/updatePromotionsValidationStep"
+  },
+  {
     "title": "createRegionsStep",
     "path": "/references/medusa-workflows/steps/createRegionsStep"
   },
   {
     "title": "deleteRegionsStep",
     "path": "/references/medusa-workflows/steps/deleteRegionsStep"
+  },
+  {
+    "title": "setRegionsPaymentProvidersStep",
+    "path": "/references/medusa-workflows/steps/setRegionsPaymentProvidersStep"
   },
   {
     "title": "updateRegionsStep",
@@ -1130,6 +1194,10 @@ export const step = [
   {
     "title": "deleteShippingProfilesStep",
     "path": "/references/medusa-workflows/steps/deleteShippingProfilesStep"
+  },
+  {
+    "title": "validateStepShippingProfileDelete",
+    "path": "/references/medusa-workflows/validateStepShippingProfileDelete"
   },
   {
     "title": "createStockLocations",

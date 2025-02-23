@@ -1,6 +1,7 @@
 import { RemoteFetchDataCallback } from "@medusajs/orchestration"
 import {
   ExternalModuleDeclaration,
+  IIndexService,
   ILinkMigrationsPlanner,
   InternalModuleDeclaration,
   LoadedModule,
@@ -27,13 +28,13 @@ import {
   promiseAll,
 } from "@medusajs/utils"
 import { asValue } from "awilix"
+import { Link } from "./link"
 import {
   MedusaModule,
   MigrationOptions,
   ModuleBootstrapOptions,
   RegisterModuleJoinerConfig,
 } from "./medusa-module"
-import { Link } from "./link"
 import { createQuery, RemoteQuery } from "./remote-query"
 import { MODULE_SCOPE } from "./types"
 
@@ -106,7 +107,8 @@ export async function loadModules(args: {
     let declaration: any = {}
     let definition: Partial<ModuleDefinition> | undefined = undefined
 
-    if (mod === false) {
+    // TODO: We are keeping mod === false for backward compatibility for now
+    if (mod === false || (isObject(mod) && "disable" in mod && mod.disable)) {
       continue
     }
 
@@ -561,13 +563,20 @@ async function MedusaApp_({
     return getMigrationPlanner(options, linkModules)
   }
 
+  const indexModule = sharedContainer_.resolve(Modules.INDEX, {
+    allowUnregistered: true,
+  }) as IIndexService
+
   return {
     onApplicationShutdown,
     onApplicationPrepareShutdown,
     onApplicationStart,
     modules: allModules,
     link: remoteLink,
-    query: createQuery(remoteQuery) as any, // TODO: rm any once we remove the old RemoteQueryFunction and rely on the Query object instead,
+    query: createQuery({
+      remoteQuery,
+      indexModule,
+    }) as any, // TODO: rm any once we remove the old RemoteQueryFunction and rely on the Query object instead,
     entitiesMap,
     gqlSchema: schema,
     notFound,

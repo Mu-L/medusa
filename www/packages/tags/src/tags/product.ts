@@ -12,6 +12,10 @@ export const product = [
     "path": "/commerce-modules/product/guides/price-with-taxes"
   },
   {
+    "title": "Implement Express Checkout with Medusa",
+    "path": "/storefront-development/guides/express-checkout"
+  },
+  {
     "title": "List Product Categories in Storefront",
     "path": "/storefront-development/products/categories/list"
   },
@@ -70,6 +74,10 @@ export const product = [
   {
     "title": "Select Product Variants in Storefront",
     "path": "/storefront-development/products/variants"
+  },
+  {
+    "title": "batchLinkProductsToCategoryStep",
+    "path": "/references/medusa-workflows/steps/batchLinkProductsToCategoryStep"
   },
   {
     "title": "batchLinkProductsToCollectionStep",
@@ -158,6 +166,10 @@ export const product = [
   {
     "title": "updateProductsStep",
     "path": "/references/medusa-workflows/steps/updateProductsStep"
+  },
+  {
+    "title": "batchLinkProductsToCategoryWorkflow",
+    "path": "/references/medusa-workflows/batchLinkProductsToCategoryWorkflow"
   },
   {
     "title": "batchLinkProductsToCollectionWorkflow",

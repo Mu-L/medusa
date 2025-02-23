@@ -16,8 +16,20 @@ export const payment = [
     "path": "/storefront-development/checkout/payment/stripe"
   },
   {
+    "title": "Implement Express Checkout with Medusa",
+    "path": "/storefront-development/guides/express-checkout"
+  },
+  {
     "title": "createPaymentCollectionsStep",
     "path": "/references/medusa-workflows/steps/createPaymentCollectionsStep"
+  },
+  {
+    "title": "addShippingMethodToCartWorkflow",
+    "path": "/references/medusa-workflows/addShippingMethodToCartWorkflow"
+  },
+  {
+    "title": "addToCartWorkflow",
+    "path": "/references/medusa-workflows/addToCartWorkflow"
   },
   {
     "title": "completeCartWorkflow",
@@ -32,12 +44,52 @@ export const payment = [
     "path": "/references/medusa-workflows/createPaymentCollectionForCartWorkflow"
   },
   {
+    "title": "refreshCartItemsWorkflow",
+    "path": "/references/medusa-workflows/refreshCartItemsWorkflow"
+  },
+  {
     "title": "refreshPaymentCollectionForCartWorkflow",
     "path": "/references/medusa-workflows/refreshPaymentCollectionForCartWorkflow"
   },
   {
+    "title": "transferCartCustomerWorkflow",
+    "path": "/references/medusa-workflows/transferCartCustomerWorkflow"
+  },
+  {
+    "title": "updateCartWorkflow",
+    "path": "/references/medusa-workflows/updateCartWorkflow"
+  },
+  {
+    "title": "updateLineItemInCartWorkflow",
+    "path": "/references/medusa-workflows/updateLineItemInCartWorkflow"
+  },
+  {
+    "title": "deleteLineItemsWorkflow",
+    "path": "/references/medusa-workflows/deleteLineItemsWorkflow"
+  },
+  {
     "title": "cancelOrderWorkflow",
     "path": "/references/medusa-workflows/cancelOrderWorkflow"
+  },
+  {
+    "title": "confirmClaimRequestWorkflow",
+    "path": "/references/medusa-workflows/confirmClaimRequestWorkflow"
+  },
+  {
+    "title": "confirmExchangeRequestWorkflow",
+    "path": "/references/medusa-workflows/confirmExchangeRequestWorkflow"
+  },
+  {
+    "title": "confirmOrderEditRequestWorkflow",
+    "path": "/references/medusa-workflows/confirmOrderEditRequestWorkflow"
+  },
+  {
+    "title": "confirmReturnRequestWorkflow",
+    "path": "/references/medusa-workflows/confirmReturnRequestWorkflow"
+  },
+  {
+    "title": "createOrUpdateOrderPaymentCollectionWorkflow",
+    "path": "/references/medusa-workflows/createOrUpdateOrderPaymentCollectionWorkflow"
   },
   {
     "title": "createOrderPaymentCollectionWorkflow",
@@ -46,6 +98,10 @@ export const payment = [
   {
     "title": "markPaymentCollectionAsPaid",
     "path": "/references/medusa-workflows/markPaymentCollectionAsPaid"
+  },
+  {
+    "title": "requestOrderEditRequestWorkflow",
+    "path": "/references/medusa-workflows/requestOrderEditRequestWorkflow"
   },
   {
     "title": "authorizePaymentSessionStep",
@@ -84,6 +140,10 @@ export const payment = [
     "path": "/references/medusa-workflows/refundPaymentsWorkflow"
   },
   {
+    "title": "createPaymentAccountHolderStep",
+    "path": "/references/medusa-workflows/steps/createPaymentAccountHolderStep"
+  },
+  {
     "title": "createPaymentSessionStep",
     "path": "/references/medusa-workflows/steps/createPaymentSessionStep"
   },
@@ -94,6 +154,10 @@ export const payment = [
   {
     "title": "deletePaymentSessionsStep",
     "path": "/references/medusa-workflows/steps/deletePaymentSessionsStep"
+  },
+  {
+    "title": "deleteRefundReasonsStep",
+    "path": "/references/medusa-workflows/steps/deleteRefundReasonsStep"
   },
   {
     "title": "updatePaymentCollectionStep",
@@ -116,8 +180,24 @@ export const payment = [
     "path": "/references/medusa-workflows/deletePaymentSessionsWorkflow"
   },
   {
+    "title": "deleteRefundReasonsWorkflow",
+    "path": "/references/medusa-workflows/deleteRefundReasonsWorkflow"
+  },
+  {
     "title": "updateRefundReasonsWorkflow",
     "path": "/references/medusa-workflows/updateRefundReasonsWorkflow"
+  },
+  {
+    "title": "setRegionsPaymentProvidersStep",
+    "path": "/references/medusa-workflows/steps/setRegionsPaymentProvidersStep"
+  },
+  {
+    "title": "createRegionsWorkflow",
+    "path": "/references/medusa-workflows/createRegionsWorkflow"
+  },
+  {
+    "title": "updateRegionsWorkflow",
+    "path": "/references/medusa-workflows/updateRegionsWorkflow"
   },
   {
     "title": "payment",

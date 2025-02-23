@@ -4,6 +4,7 @@ import {
 } from "../modules-sdk"
 
 import type { RedisOptions } from "ioredis"
+import { ConnectionOptions } from "node:tls"
 // @ts-ignore
 import type { InlineConfig } from "vite"
 
@@ -280,12 +281,7 @@ export type ProjectConfigOptions = {
       /**
        * Configure support for TLS/SSL connection
        */
-      ssl?: {
-        /**
-         * Whether to fail connection if the server certificate is verified against the list of supplied CAs and the hostname and no match is found.
-         */
-        rejectUnauthorized?: false
-      }
+      ssl?: boolean | ConnectionOptions
     }
   }
 
@@ -945,15 +941,20 @@ type ExternalModuleDeclarationOverride = ExternalModuleDeclaration & {
 }
 
 /**
+ * Modules accepted by the defineConfig function
+ */
+export type InputConfigModules = Partial<
+  InternalModuleDeclarationOverride | ExternalModuleDeclarationOverride
+>[]
+
+/**
  * The configuration accepted by the "defineConfig" helper
  */
 export type InputConfig = Partial<
   Omit<ConfigModule, "admin" | "modules"> & {
     admin: Partial<ConfigModule["admin"]>
     modules:
-      | Partial<
-          InternalModuleDeclarationOverride | ExternalModuleDeclarationOverride
-        >[]
+      | InputConfigModules
       /**
        * @deprecated use the array instead
        */
@@ -963,9 +964,10 @@ export type InputConfig = Partial<
 
 export type PluginDetails = {
   resolve: string
+  adminResolve: string
   name: string
   id: string
   options: Record<string, unknown>
   version: string
-  modules?: InputConfig["modules"]
+  modules?: InputConfigModules
 }
